@@ -33,6 +33,14 @@ if [ -f "$WOFI_STYLE" ]; then
 else
     echo "Notice: Wofi style.css not found, skipping path update."
 fi
+
+# 2. Niri autostart.kdl frissítése
+if [ -f "$NIRI_AUTOSTART" ]; then
+    echo "Updating Niri autostart paths for user: $USER..."
+    sed -i "s|/home/USERNAME/|/home/$USER/|g" "$NIRI_AUTOSTART"
+else
+    echo "Notice: Niri autostart.kdl not found, skipping."
+fi
 # =====================================================================
 
 echo "Setting permissions..."

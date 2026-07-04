@@ -23,7 +23,7 @@ spawn-at-startup "swaync"
 
 // --- 7) SHELL + WALLPAPER ---
 spawn-at-startup "skwd-daemon"
-spawn-at-startup "rust-shell"
+spawn-at-startup "/home/USERNAME/.local/bin/rust-shell"
 
 // -------------------------------------------------------
 // Alternatívák / kommentált opciók
