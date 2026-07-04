@@ -2,6 +2,33 @@
 
 echo "Starting setup..."
 
+# =====================================================================
+# PRED-FLIGHT: RSYNC ELLENŐRZÉSE ÉS TELEPÍTÉSE
+# =====================================================================
+if ! command -v rsync &>/dev/null; then
+    echo "-> rsync is not installed. Attempting to install it..."
+    if command -v pacman &>/dev/null; then
+        echo "Detected Arch-based system. Installing rsync via pacman..."
+        sudo pacman -Sy --noconfirm rsync
+    elif command -v apt-get &>/dev/null; then
+        echo "Detected Debian/Ubuntu-based system. Installing rsync via apt..."
+        sudo apt-get update && sudo apt-get install -y rsync
+    elif command -v dnf &>/dev/null; then
+        echo "Detected Fedora-based system. Installing rsync via dnf..."
+        sudo dnf install -y rsync
+    else
+        echo "ERROR: Package manager not recognized. Please install 'rsync' manually and rerun the script."
+        exit 1
+    fi
+
+    # Biztonsági ellenőrzés, hogy sikerült-e a telepítés
+    if ! command -v rsync &>/dev/null; then
+        echo "ERROR: Failed to install rsync. Aborting."
+        exit 1
+    fi
+fi
+# =====================================================================
+
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 echo "Copying files to HOME..."
