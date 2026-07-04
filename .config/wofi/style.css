@@ -1,5 +1,5 @@
 /* FIX: Teljes abszolút elérési út, így bárhonnan indíthatod a Wofi-t */
-@import url('wofi-colors.css');
+@import url('/home/USERNAME/.config/wofi/wofi-colors.css');
 
 /* Globális betűtípus */
 * {
@@ -30,7 +30,7 @@ window {
   border-radius: 0px;
 
   /* A háttérkép, ami teljesen kitölti a felső sávot */
-  background-image: url('../../.cache/skwd-wall/wallpaper/current.jpg');
+  background-image: url('/home/USERNAME/.cache/skwd-wall/wallpaper/current.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
