@@ -310,6 +310,21 @@ tooltip > label {
   padding: 2px;
 }
 
+/* A részletes hangmixer lapnak (ld. quicksettings.rs
+   build_audio_settings_view, page.add_css_class("qs-audio-settings"))
+   EDDIG nem volt saját min-width-je - emiatt a lap szélessége a TÉNYLEGES
+   tartalomhoz (a Stack natural width-jéhez) igazodott: üres-állapotban a
+   hosszú "Jelenleg nincs hangot lejátszó alkalmazás" felirat adta a
+   legszélesebb elemet, de amint volt hangot lejátszó alkalmazás, az
+   app-sorok (rövidebb, width_chars(9)-es name_label + kis natural
+   szélességű Scale) natural szélessége ennél kisebb volt, és a panel
+   láthatóan összement. Ugyanazt a rögzített szélességet adjuk neki, mint
+   a főlapnak (`.qs-content`), hogy a panel szélessége FÜGGETLEN legyen
+   attól, fut-e éppen hangot lejátszó program. */
+.quick-settings-popover .qs-audio-settings {
+  min-width: 290px;
+}
+
 /* ── Csúszka-kártya (hangerő + fényerő) ───────────────────────────────────
    A folytonos értékű vezérlőket egy közös, halványan kiemelt "surface"
    felületbe csoportosítjuk - ez adja azt az androidos érzetet, hogy a
