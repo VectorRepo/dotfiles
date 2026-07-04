@@ -37,7 +37,7 @@ RUST_SHELL_SETTINGS="$HOME/.config/rust-shell/settings.json"
 # Wofi CSS útvonalak frissítése
 if [ -f "$WOFI_STYLE" ]; then
     echo "Updating Wofi paths for user: $USER..."
-    sed -i "s|/home/adam/|/home/$USER/|g" "$WOFI_STYLE"
+    sed -i "s|/home/USERNAME/|/home/$USER/|g" "$WOFI_STYLE"
 else
     echo "Notice: Wofi style.css not found, skipping path update."
 fi
@@ -45,7 +45,7 @@ fi
 # Niri autostart.kdl frissítése
 if [ -f "$NIRI_AUTOSTART" ]; then
     echo "Updating Niri autostart paths for user: $USER..."
-    sed -i "s|/home/adam/|/home/$USER/|g" "$NIRI_AUTOSTART"
+    sed -i "s|/home/USERNAME/|/home/$USER/|g" "$NIRI_AUTOSTART"
 else
     echo "Notice: Niri autostart.kdl not found, skipping path update."
 fi
@@ -71,21 +71,50 @@ if [ -f "$NIRI_ENV" ]; then
     fi
 fi
 
-# --- MONITOR ÉS HZ AUTOMATIKUS MEGHATÁROZÁSA ---
-DETECTED_MONITOR=$(ls /sys/class/drm/ | grep -E '^card[0-9]+-' | cut -d'-' -f2- | grep -v '^intel_backlight' | head -n 1)
+# --- MONITOR ÉS HZ AUTOMATIKUS MEGHATÁROZÁSA (Precíziós verzió) ---
+echo "Querying active displays..."
 
+DETECTED_MONITOR=""
+MAX_HZ=""
+
+# 1. Megpróbáljuk a futó Niri-ből kiszedni az élő adatokat
+if command -v niri &>/dev/null && niri msg outputs &>/dev/null; then
+    DETECTED_MONITOR=$(niri msg outputs | grep -E '^Output ' | head -n 1 | awk '{print $NF}' | tr -d '()')
+    MAX_HZ=$(niri msg outputs | awk -v mon="($DETECTED_MONITOR)" '
+        $0 ~ mon {p=1; next} 
+        /^Output / {p=0} 
+        p && /@[0-9]/ {print $0}' | awk -F'@' '{print $2}' | awk '{print $1}' | sort -nr | head -n 1 | cut -d'.' -f1)
+fi
+
+# 2. Ha a Niri nem fut, megnézzük a sysfs-t, de CSAK a connected (aktív) monitorokat keresve!
+if [ -z "$DETECTED_MONITOR" ]; then
+    for d in /sys/class/drm/card*-[A-Za-z0-9]*; do
+        if [ -f "$d/status" ] && grep -q '^connected' "$d/status"; then
+            # Letisztítjuk a cardX előtagot az elejéről, megkapva a pontos nevet (pl: eDP-2 vagy HDMI-A-1)
+            DETECTED_MONITOR=$(basename "$d" | sed 's/^card[0-9]\+-//')
+            break
+        fi
+    done
+fi
+
+# 3. Biztonsági mentőöv (Fallback), ha minden kötél szakad
 if [ -z "$DETECTED_MONITOR" ]; then
     DETECTED_MONITOR="HDMI-A-1"
 fi
 
-echo "-> Primary monitor identified: $DETECTED_MONITOR"
-
-MAX_HZ="60"
-if [ "$DETECTED_MONITOR" = "HDMI-A-1" ]; then
-    MAX_HZ="120"
-else
-    MAX_HZ="60"
+# 4. Intelligens Hz meghatározás, ha szoftveresen nem sikerült (pl. tiszta TTY-ból telepítéskor)
+if [ -z "$MAX_HZ" ] || [ "$MAX_HZ" -lt 60 ]; then
+    if [[ "$DETECTED_MONITOR" == *"eDP"* ]]; then
+        MAX_HZ="144" # Laptop kijelzőnek (eDP-2) 144Hz
+    elif [ "$DETECTED_MONITOR" = "HDMI-A-1" ]; then
+        MAX_HZ="120" # A te külső monitorod alapértelmezett értéke
+    else
+        MAX_HZ="60"  # Minden más ismeretlen monitorra biztonsági 60Hz
+    fi
 fi
+
+echo "-> Primary monitor identified: $DETECTED_MONITOR"
+echo "-> Refresh rate set to: ${MAX_HZ}Hz"
 
 # Niri monitor beállítás frissítése
 if [ -f "$NIRI_MONITOR" ]; then
