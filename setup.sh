@@ -21,6 +21,20 @@ rsync -av --progress "$DOTFILES_DIR"/.zshrc ~/.zshrc
 rsync -av --progress "$DOTFILES_DIR"/.zprofile ~/.zprofile
 rsync -av --progress "$DOTFILES_DIR"/Pictures/ ~/Pictures/
 
+# =====================================================================
+# ÚJ RÉSZ: Wofi CSS útvonalak testreszabása az aktuális felhasználóhoz
+# =====================================================================
+WOFI_STYLE="$HOME/.config/wofi/style.css"
+
+if [ -f "$WOFI_STYLE" ]; then
+    echo "Updating Wofi paths for user: $USER..."
+    # Kicseréli az összes '/home/adam/' szöveget az éppen aktuális '/home/felhasználónév/'-re
+    sed -i "s|/home/USERNAME/|/home/$USER/|g" "$WOFI_STYLE"
+else
+    echo "Notice: Wofi style.css not found, skipping path update."
+fi
+# =====================================================================
+
 echo "Setting permissions..."
 
 # ORCHESTRA futtathatóvá tétele

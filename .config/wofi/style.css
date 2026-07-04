@@ -30,7 +30,7 @@ window {
   border-radius: 0px;
 
   /* A háttérkép, ami teljesen kitölti a felső sávot */
-  background-image: url('/home/adam/.cache/skwd-wall/wallpaper/current.jpg');
+  background-image: url('../../.cache/skwd-wall/wallpaper/current.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
