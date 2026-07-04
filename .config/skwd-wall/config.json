@@ -102,7 +102,7 @@
     {
       "name": "swaync",
       "template": "rustshell.css",
-      "output": "/home/adam/.config/swaync/colors.css",
+      "output": "~/.config/swaync/colors.css",
       "reload": "swaync-client -R && swaync-client -rs"
     },
     {

@@ -1,5 +1,5 @@
 /* FIX: Teljes abszolút elérési út, így bárhonnan indíthatod a Wofi-t */
-@import url('/home/adam/.config/wofi/wofi-colors.css');
+@import url('wofi-colors.css');
 
 /* Globális betűtípus */
 * {
