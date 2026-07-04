@@ -1,0 +1,396 @@
+@import url('colors.css');
+
+/* SZÁNDÉKOSAN nincs itt egy globális `* { all: unset; }` reset - ez a
+   GTK4 default widget-node-ok (switch, scrollbar, stb.) belső
+   struktúráját is lenullázná, amit utána soronként kellene visszaépíteni.
+   Ehelyett, a rust-shell style.css mintáját követve (ld. `.text-font,
+   .clock-label, ...` szelektor-lista a fájl tetején), a betűtípust
+   explicit, node-onként állítjuk be lentebb. */
+window,
+.control-center,
+.widget-title,
+.widget-title > button,
+.widget-dnd label,
+.widget-label,
+.notification-content .summary,
+.notification-content .time,
+.notification-content .body,
+.notification-action,
+.notification-default-action,
+.notification-group-name,
+tooltip > label {
+  font-family: 'Fira Sans Semibold', 'Fira Sans', sans-serif;
+}
+
+/* ── Ablakok ─────────────────────────────────────────────────────────── */
+/* A control center és a toast-ablakok gyökér-node-ja - transzparens
+   háttér kell, különben egy négyszögletes, sötét téglalap látszana a
+   panel lekerekített sarkai KÖRÜL (ugyanaz a minta, mint a rust-shell
+   `window { background-color: transparent; }` szabálya). */
+window,
+.control-center,
+.floating-notifications,
+#notification-window {
+  background-color: transparent;
+}
+
+/* Kattintható, teljes képernyős "üveg" a control center mögött (autohide
+   kívülre kattintáshoz) - ennek is láthatatlannak kell maradnia. */
+.blank-window {
+  background-color: transparent;
+}
+
+/* ── Control center panel ───────────────────────────────────────────────
+   A tray-menü/Quick Settings popover hátterét adó szabály 1:1 megfelelője
+   (ld. rust-shell style.css `.tray-menu-popover > contents`): ugyanaz az
+   alpha(surface_container_high, 0.98) kitöltés, ugyanaz az outline-keret,
+   ugyanaz a 14px sugár és kétrétegű árnyék - hogy a control center
+   ténylegesen "ugyanabból a panel-családból" nézzen ki, mint a bar
+   popoverei. */
+.control-center {
+  background-color: alpha(@surface_container_high, 0.98);
+  border: 1px solid alpha(@outline, 0.22);
+  border-radius: 14px;
+  padding: 8px;
+  box-shadow:
+    0 1px 2px alpha(@shadow, 0.3),
+    0 10px 28px alpha(@shadow, 0.4);
+}
+
+.control-center-list {
+  background: transparent;
+  padding: 2px;
+}
+
+.control-center-list-placeholder {
+  color: alpha(@primary, 0.5);
+  font-size: 13px;
+  padding: 24px 0;
+}
+
+/* ── "Értesítések" fejléc + "Összes törlése" gomb ────────────────────────
+   A widget-title a control center tetején él (ld. config.json
+   widget-config.title) - a törlés-gomb a rust-shell #return-btn mintáját
+   követi: alapból visszafogott, hover-re invertált (primary háttér,
+   on_primary szövegszín), hogy egy "veszélytelen, de végleges" akciónak
+   érezze a felhasználó. */
+.widget-title {
+  color: @primary;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 4px 8px 8px 8px;
+}
+
+.widget-title > button {
+  color: alpha(@primary, 0.55);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 999px;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+.widget-title > button:hover {
+  background-color: @primary;
+  color: @on_primary;
+}
+
+/* ── "Ne zavarj" csempe ───────────────────────────────────────────────────
+   Ugyanaz a "knockout toggle" elv, mint a Quick Settings `.qs-tile.active`
+   (ld. rust-shell style.css): inaktívban tompa surface-tónus, aktívban a
+   TELJES sáv @primary-vel telítődik, a szöveg pedig @on_primary-re vált a
+   kontraszt miatt. */
+.widget-dnd {
+  background-color: alpha(@surface_container_high, 0.85);
+  border: 1px solid alpha(@outline, 0.14);
+  border-radius: 12px;
+  padding: 8px 12px;
+  margin: 2px 2px 6px 2px;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.widget-dnd label {
+  color: @primary;
+  font-size: 13px;
+}
+
+.widget-dnd > switch {
+  background-color: alpha(@outline, 0.3);
+  border-radius: 999px;
+  min-width: 36px;
+  min-height: 20px;
+  transition: background-color 180ms ease;
+}
+
+.widget-dnd > switch slider {
+  background-color: @on_background;
+  border-radius: 50%;
+  min-width: 16px;
+  min-height: 16px;
+  margin: 2px;
+}
+
+.widget-dnd > switch:checked {
+  background-color: @primary;
+}
+
+.widget-dnd > switch:checked slider {
+  background-color: @on_primary;
+}
+
+/* Üres-állapot felirat (ld. config.json widget-config.label). */
+.widget-label {
+  color: alpha(@primary, 0.6);
+  font-size: 12px;
+  padding: 4px 8px;
+}
+
+/* ── Egyedi értesítés-sor ─────────────────────────────────────────────────
+   A `.notification-background` az EGYETLEN vizuális réteg (háttér, keret,
+   lekerekítés) - a `.notification` node minden alapértelmezett box-shadow-ját,
+   margóját és paddingjét lenullázzuk lentebb, hogy ne fusson egymásba két
+   eltérő kártya. A control center listájában a panel (`.control-center`)
+   már ad mélységet, ezért ott nincs külön árnyék soronként; a lebegő
+   popup-nak (#notification-window) egyetlen, tiszta árnyékot adunk. */
+.notification-row {
+  padding: 3px 0;
+  outline: none;
+}
+
+.notification-row:focus,
+.notification-row:hover {
+  background: transparent;
+}
+
+/* A swaync alap style.css-e (`.notification`) magától is ad box-shadow-t,
+   margin-t és padding-et - ha ez futva marad a mi `.notification-background`
+   kártyánk MELLETT, két, eltérő sugarú/árnyékú "doboz" jön létre egymásba
+   ágyazva, ez okozta a rétegzett hatást. Itt nullázzuk le, hogy CSAK a
+   `.notification-background` adja a látható kártyát. */
+.notification {
+  background: none;
+  border: none;
+  box-shadow: none;
+  border-radius: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+.notification-background {
+  background-color: alpha(@surface_container, 0.9);
+  border: 1px solid alpha(@outline, 0.14);
+  border-radius: 12px;
+  padding: 0;
+  margin: 0;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease;
+}
+
+/* A hover-re váltó háttér/keret CSAK a control center listájában van
+   értelme (jelzi, hogy a sor kattintható) - a lebegő popup-nál (toast)
+   ez csak egy zavaró, felesleges "réteg-villanás" volt, amikor az egér
+   áthaladt rajta, ezért ott nem alkalmazzuk. */
+.control-center .notification-row:hover .notification-background {
+  background-color: @surface_container;
+  border-color: alpha(@primary, 0.3);
+}
+
+/* A control center listájában a panel (.control-center) már ad mélységet,
+   ott extra árnyék csak tovább rétegezné a felületet - ezért a lebegő
+   popup-nak (#notification-window) adunk EGYETLEN, letisztult árnyékot,
+   a listás soroknak nem. */
+#notification-window .notification-background {
+  box-shadow:
+    0 2px 6px alpha(@shadow, 0.25),
+    0 8px 20px alpha(@shadow, 0.35);
+}
+
+.notification-content {
+  padding: 10px 10px 6px 10px;
+}
+
+.notification-content .summary {
+  color: @primary;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.notification-content .time {
+  color: alpha(@primary, 0.55);
+  font-size: 11px;
+}
+
+.notification-content .body {
+  color: alpha(@primary, 0.85);
+  font-size: 12px;
+}
+
+.notification-content image,
+.notification-content .image {
+  border-radius: 8px;
+}
+
+/* Az alkalmazás-ikon (app-icon) kör alakú médium a summary mellett -
+   nincs saját kitöltő háttere, hogy ikon hiányában ne maradjon egy
+   üres szürke "folt" a kártya bal oldalán. */
+.notification-icon,
+.app-icon {
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+/* Bezárás-gomb: pontosan a rust-shell `.icon-btn` "knockout" hoverét
+   követi (ld. style.css .icon-btn.hovered) - alapból semleges, hover-re
+   TELJESEN kitöltött piros (nem a témától függő @primary, mert a "zárás"
+   itt nem márka-akció, hanem ugyanaz a fix danger-piros, mint a
+   notif-badge/danger-btn, ld. rust-shell style.css). */
+.close-button {
+  background: none;
+  border-radius: 50%;
+  color: alpha(@primary, 0.6);
+  min-width: 20px;
+  min-height: 20px;
+  padding: 3px;
+  margin: 6px 6px 0 0;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+.close-button:hover {
+  background-color: #ff5555;
+  color: #ffffff;
+}
+
+/* ── Akció-gombok (pl. "Válasz", "Elutasít") ──────────────────────────────
+   FONTOS: a `.notification-default-action` NEM egy kis gomb, hanem az
+   értesítés TELJES tartalmát (ikon+summary+body) lefedő kattintható
+   terület. Ha ez ugyanazt a "gomb" hátteret/hover-kitöltést kapja, mint
+   a valódi akció-gombok, egy második réteg jön létre a kártyán belül,
+   ami hoverkor befesti az egész tartalmat - ezt akarjuk elkerülni. */
+.notification-action {
+  background-color: alpha(@surface_container_high, 0.7);
+  color: @primary;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 10px;
+  margin: 0 6px 8px 6px;
+  transition:
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+.notification-default-action {
+  background: none;
+  color: @primary;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.notification-action:hover {
+  background-color: @primary;
+  color: @on_primary;
+}
+
+.notification-action:active {
+  background-color: alpha(@primary, 0.85);
+  color: @on_primary;
+}
+
+/* A teljes kártyát lefedő default-action-nek nincs szüksége saját
+   hover-hátterére - a kártya (`.notification-background`) állandó marad,
+   nem villan/vált színt, amikor az egér áthalad a tartalmon. */
+.notification-default-action:hover,
+.notification-default-action:active {
+  background: none;
+}
+
+/* ── Sürgősségi szintek ───────────────────────────────────────────────────
+   Low: visszafogottabb (alacsonyabb alpha a kártyán). Critical: a fix
+   danger-piros él balra a kártyán, ugyanaz a "ez figyelmet igényel" jelzés,
+   mint a harang-badge (ld. rust-shell style.css .notif-badge). */
+.notification-row.low .notification-background {
+  background-color: alpha(@surface_container, 0.4);
+}
+
+.notification-row.critical .notification-background {
+  border: 1px solid alpha(#ff5555, 0.6);
+  border-left: 3px solid #ff5555;
+}
+
+.notification-row.critical .notification-content .summary {
+  color: #ff5555;
+}
+
+/* ── Csoportosított értesítések (több toast egy app-tól) ─────────────────
+ */
+.notification-group {
+  background-color: alpha(@surface_container, 0.4);
+  border-radius: 12px;
+  margin-bottom: 4px;
+}
+
+.notification-group-headers {
+  padding: 6px 8px;
+}
+
+.notification-group-icon {
+  border-radius: 50%;
+}
+
+.notification-group-name {
+  color: alpha(@primary, 0.75);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.notification-group-collapse-button {
+  color: alpha(@primary, 0.6);
+  border-radius: 50%;
+  min-width: 18px;
+  min-height: 18px;
+  transition: background-color 150ms ease;
+}
+
+.notification-group-collapse-button:hover {
+  background-color: @primary;
+  color: @on_primary;
+}
+
+/* ── Görgetősáv ────────────────────────────────────────────────────────── */
+scrollbar {
+  background: transparent;
+}
+
+scrollbar slider {
+  background-color: alpha(@outline, 0.4);
+  border-radius: 999px;
+  min-width: 4px;
+  min-height: 4px;
+}
+
+scrollbar slider:hover {
+  background-color: alpha(@outline, 0.6);
+}
+
+/* ── Tooltip ───────────────────────────────────────────────────────────
+   1:1 a rust-shell tooltip-jével (ld. style.css `tooltip`), hogy a
+   swaync és a bar tooltip-jei ne ünessenek el egymástól. */
+tooltip {
+  background-color: @surface_container_high;
+  border: 1px solid alpha(@outline, 0.4);
+  border-radius: 8px;
+  padding: 4px 8px;
+  box-shadow: 0 2px 8px alpha(@shadow, 0.4);
+}
+
+tooltip > label {
+  color: @primary;
+  font-size: 12px;
+}

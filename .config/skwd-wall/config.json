@@ -1,0 +1,140 @@
+{
+  "compositor": "niri",
+  "monitor": "",
+  "general": {
+    "locale": "",
+    "closeOnSelection": false,
+    "reopenAtLastSelection": false
+  },
+  "paths": {
+    "wallpaper": "~/Pictures/Wallpapers",
+    "videoWallpaper": "~/videowalls",
+    "cache": "",
+    "templates": "",
+    "scripts": "",
+    "steam": "",
+    "steamWorkshop": "",
+    "steamWeAssets": ""
+  },
+  "features": {
+    "matugen": true,
+    "ollama": false,
+    "steam": false,
+    "wallhaven": true
+  },
+  "colorSource": "magick",
+  "ollama": {
+    "url": "http://localhost:11434",
+    "model": "gemma3:4b",
+    "consolidateEnabled": true
+  },
+  "steam": {
+    "apiKey": "",
+    "username": ""
+  },
+  "wallhaven": {
+    "apiKey": ""
+  },
+  "matugen": {
+    "schemeType": "scheme-content",
+    "mode": "dark",
+    "colorIndex": 0
+  },
+  "integrations": [
+    {
+      "_comment": "Built-in: MD3 colors for the shell UI (always needed)",
+      "name": "skwd-wall",
+      "template": "quickshell-colors.json",
+      "output": "colors.json"
+    },
+    {
+      "name": "kitty",
+      "template": "kitty-colors.conf",
+      "output": "~/.config/kitty/kitty-colors.conf",
+      "reload": "pkill -SIGUSR1 kitty || true"
+    },
+    {
+      "name": "niri",
+      "template": "niri-colors.kdl",
+      "output": "~/.config/niri/main/niri-colors.kdl"
+    },
+    {
+      "name": "gtk3",
+      "template": "gtk-colors.css",
+      "output": "~/.config/gtk-3.0/gtk.css"
+    },
+    {
+      "name": "gtk4",
+      "template": "gtk-colors.css",
+      "output": "~/.config/gtk-4.0/gtk.css"
+    },
+    {
+      "name": "qt5ct",
+      "template": "qtct-colors.conf",
+      "output": "~/.config/qt5ct/qt5ct-colors.conf"
+    },
+    {
+      "name": "qt6ct",
+      "template": "qtct-colors.conf",
+      "output": "~/.config/qt6ct/qt6ct-colors.conf"
+    },
+    {
+      "name": "neovim",
+      "template": "neovim-template.lua",
+      "output": "~/.config/nvim/neovim-colors.lua",
+      "reload": "pkill -SIGUSR1 nvim || true"
+    },
+    {
+      "name": "zen",
+      "template": "zen.css",
+      "output": "~/.config/zen/4g9y7vqe.Default (release)/chrome/userChrome.css"
+    },
+    {
+      "name": "vesktop",
+      "template": "vesktop.css",
+      "output": "~/.config/vesktop/themes/matugen.css"
+    },
+    {
+      "name": "rustshell",
+      "template": "rustshell.css",
+      "output": "~/.config/rust-shell/assets/colors.css"
+    },
+    {
+      "name": "swaync",
+      "template": "rustshell.css",
+      "output": "/home/adam/.config/swaync/colors.css",
+      "reload": "swaync-client -R && swaync-client -rs"
+    },
+    {
+      "name": "wofi",
+      "template": "wofi.css",
+      "output": "~/.config/wofi/wofi-colors.css"
+    }
+  ],
+  "components": {
+    "wallpaperSelector": {
+      "displayMode": "slices",
+      "sliceSpacing": -30,
+      "hexScrollStep": 1,
+      "customPresets": {}
+    }
+  },
+  "wallpaperMute": true,
+  "pickOnlyMode": false,
+  "externalWallpaperCommand": "",
+  "postProcessing": [],
+  "performance": {
+    "imageOptimizePreset": "balanced",
+    "imageOptimizeResolution": "2k",
+    "videoConvertPreset": "balanced",
+    "videoConvertResolution": "2k",
+    "autoOptimizeImages": false,
+    "autoConvertVideos": false,
+    "imageTrashDays": 7,
+    "videoTrashDays": 7,
+    "autoDeleteImageTrash": false,
+    "autoDeleteVideoTrash": false
+  },
+  "externalMatugenCommand": "matugen --no-config",
+  "defaultMatugenConfig": ""
+}

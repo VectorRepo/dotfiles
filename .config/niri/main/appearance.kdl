@@ -1,0 +1,89 @@
+// ============================================================
+// ~/.config/niri/main/appearance.kdl
+// Layout, opacity, corner radius, animációk
+// A focus-ring SZÍNEK külön: niri-colors.kdl (Matugen)
+// ============================================================
+
+layout {
+    gaps 10
+
+    // Átlátszó háttér — wallpaper látszik az overview-ban
+    background-color "transparent"
+
+    center-focused-column "never"
+
+    default-column-width { proportion 0.5; }
+
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+        proportion 1.0
+    }
+
+    preset-window-heights {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+        proportion 1.0
+    }
+}
+
+overview {
+    workspace-shadow {
+        off
+    }
+}
+
+cursor {
+    xcursor-theme "Bibata-Modern-Classic"
+    xcursor-size 24
+}
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+// Sarkak — 0 (mint a Hyprland rounding = 0)
+window-rule {
+    geometry-corner-radius 0
+    clip-to-geometry true
+}
+
+// Server-side decorations preferálása
+prefer-no-csd
+
+// Screenshot mentési útvonal
+screenshot-path "~/Pictures/Screenshots/Screenshot_%Y-%m-%d_%H-%M-%S.png"
+
+// ---- Animációk ----
+animations {
+    window-open {
+        duration-ms 150
+        curve "ease-out-expo"
+    }
+    window-close {
+        duration-ms 150
+        curve "ease-out-expo"
+    }
+    window-movement {
+        duration-ms 200
+        curve "ease-out-expo"
+    }
+    window-resize {
+        duration-ms 200
+        curve "ease-out-expo"
+    }
+    horizontal-view-movement {
+        duration-ms 200
+        curve "ease-out-expo"
+    }
+    workspace-switch {
+        duration-ms 250
+        curve "ease-out-expo"
+    }
+    overview-open-close {
+        duration-ms 200
+        curve "ease-out-expo"
+    }
+}

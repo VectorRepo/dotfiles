@@ -1,0 +1,16 @@
+// ============================================================
+// ~/.config/niri/main/monitor.kdl
+// ============================================================
+
+// Automatikus felismerés — preferred mode, 1x scale.
+// Ha specifikus monitort kell:
+output "HDMI-A-1" {
+    scale 1.0
+    mode "1920x1080@120"
+}
+
+
+// VRR — csak szükség esetén kapcsol be (gaming-friendly, mint Hyprland vrr=1)
+// output "DP-1" {
+//     variable-refresh-rate on-demand
+// }

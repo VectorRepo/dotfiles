@@ -1,0 +1,9 @@
+window-rule {
+  draw-border-with-background false
+  opacity 1.0
+  background-effect {
+    blur false
+    xray false
+  }
+}
+

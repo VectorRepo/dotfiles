@@ -1,0 +1,219 @@
+// ============================================================
+// ~/.config/niri/main/binds.kdl
+// ============================================================
+
+binds {
+
+    // ==========================================================
+    // 1) ALKALMAZÁSOK
+    // ==========================================================
+
+    Mod+Return hotkey-overlay-title="Terminal" {
+        spawn "kitty";
+    }
+
+    Mod+B hotkey-overlay-title="Browser" {
+        spawn "zen-browser";
+    }
+
+    Mod+E hotkey-overlay-title="File Manager" {
+        spawn "doublecmd";
+    }
+
+    Mod+R hotkey-overlay-title="Editor" {
+        spawn "kitty" "--class" "editor" "-e" "nvim";
+    }
+
+
+    // ==========================================================
+    // 2) QUICKSHELL LAUNCHERS (rofi helyett)
+    // ==========================================================
+  
+    // Widget megnyitók
+    Mod+Space {
+        spawn "wofi" "--drun";
+    }
+
+    Mod+I {
+        spawn "skwd" "wall" "toggle";
+    }
+
+    // Hangerő
+    XF86AudioRaiseVolume {
+        spawn "pactl" "set-sink-volume" "@DEFAULT_SINK@" "+5%";
+    }
+
+    XF86AudioLowerVolume {
+        spawn "pactl" "set-sink-volume" "@DEFAULT_SINK@" "-5%";
+    }
+
+    XF86AudioMute {
+        spawn "pactl" "set-sink-mute" "@DEFAULT_SINK@" "toggle";
+    }
+
+    XF86AudioMicMute {
+        spawn "qs" "ipc" "call" "shell" "micMute";
+    }
+
+    // Lockscreen
+    Mod+X { spawn "bash" "-c" "~/.config/quickshell/scripts/bash/lock"; }
+
+    // ==========================================================
+    // 3) SCREENSHOT
+    // ==========================================================
+
+    Mod+Shift+S hotkey-overlay-title="Screenshot Region" {
+        screenshot;
+    }
+
+    Print hotkey-overlay-title="Screenshot Full" {
+        screenshot-screen;
+    }
+
+    Mod+Print hotkey-overlay-title="Screenshot Window" {
+        screenshot-window;
+    }
+
+
+
+    // ==========================================================
+    // 4) ABLAKKEZELÉS
+    // ==========================================================
+
+    Mod+Q { close-window; }
+    Alt+F4 { close-window; }
+
+    Mod+Shift+Q {
+        spawn "bash" "-c" "~/.config/niri/scripts/kill-focused.sh";
+    }
+
+    Mod+F { fullscreen-window; }
+    Mod+D { maximize-column; }
+
+    Mod+Alt+Space { toggle-window-floating; }
+    Mod+Alt+C     { center-window; }
+    Mod+P         { toggle-window-floating; }
+
+    Mod+Semicolon  { switch-preset-column-width; }
+    Mod+Apostrophe { switch-preset-window-height; }
+    Mod+Ctrl+R     { reset-window-height; }
+
+
+    // ==========================================================
+    // 5) FÓKUSZ
+    // ==========================================================
+
+    Mod+H { focus-column-left; }
+    Mod+J { focus-window-down; }
+    Mod+K { focus-window-up; }
+    Mod+L { focus-column-right; }
+
+    Mod+Left  { focus-column-left; }
+    Mod+Down  { focus-window-down; }
+    Mod+Up    { focus-window-up; }
+    Mod+Right { focus-column-right; }
+
+    Mod+Home { focus-column-first; }
+    Mod+End  { focus-column-last; }
+
+
+    // ==========================================================
+    // 6) ABLAK MOZGATÁS
+    // ==========================================================
+
+    Mod+Shift+H { move-column-left; }
+    Mod+Shift+J { move-window-down; }
+    Mod+Shift+K { move-window-up; }
+    Mod+Shift+L { move-column-right; }
+
+    Mod+Shift+Left  { move-column-left; }
+    Mod+Shift+Down  { move-window-down; }
+    Mod+Shift+Up    { move-window-up; }
+    Mod+Shift+Right { move-column-right; }
+
+    Mod+Shift+Home { move-column-to-first; }
+    Mod+Shift+End  { move-column-to-last; }
+
+
+    // ==========================================================
+    // 7) ÁTMÉRETEZÉS
+    // ==========================================================
+
+    Mod+Ctrl+Right { set-column-width "+30"; }
+    Mod+Ctrl+Left  { set-column-width "-30"; }
+    Mod+Ctrl+Down  { set-window-height "+30"; }
+    Mod+Ctrl+Up    { set-window-height "-30"; }
+
+
+    // ==========================================================
+    // 8) WORKSPACEK
+    // ==========================================================
+
+    Mod+1 { focus-workspace 1; }
+    Mod+2 { focus-workspace 2; }
+    Mod+3 { focus-workspace 3; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
+    Mod+6 { focus-workspace 6; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+
+    Mod+Shift+1 { move-window-to-workspace 1; }
+    Mod+Shift+2 { move-window-to-workspace 2; }
+    Mod+Shift+3 { move-window-to-workspace 3; }
+    Mod+Shift+4 { move-window-to-workspace 4; }
+    Mod+Shift+5 { move-window-to-workspace 5; }
+    Mod+Shift+6 { move-window-to-workspace 6; }
+    Mod+Shift+7 { move-window-to-workspace 7; }
+    Mod+Shift+8 { move-window-to-workspace 8; }
+    Mod+Shift+9 { move-window-to-workspace 9; }
+
+    // Workspace navigáció — Tab-ot az overview foglalja (ld. lentebb)
+    Mod+Page_Down { focus-workspace-down; }
+    Mod+Page_Up   { focus-workspace-up; }
+
+    Mod+Shift+Page_Down { move-column-to-workspace-down; }
+    Mod+Shift+Page_Up   { move-column-to-workspace-up; }
+
+    Mod+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
+    Mod+WheelScrollUp   cooldown-ms=150 { focus-workspace-up; }
+
+    Mod+WheelScrollRight cooldown-ms=150 { focus-column-right; }
+    Mod+WheelScrollLeft  cooldown-ms=150 { focus-column-left; }
+
+    Mod+Shift+WheelScrollDown { move-column-to-workspace-down; }
+    Mod+Shift+WheelScrollUp   { move-column-to-workspace-up; }
+
+
+    // ==========================================================
+    // 9) MEDIA / HANG / FÉNYERŐ (Quickshell OSD)
+    // ==========================================================
+
+    XF86AudioPlay  { spawn "playerctl" "play-pause"; }
+    XF86AudioStop  { spawn "playerctl" "stop"; }
+    XF86AudioNext  { spawn "playerctl" "next"; }
+    XF86AudioPrev  { spawn "playerctl" "previous"; }
+
+
+    // ==========================================================
+    // 10) SESSION / RENDSZER
+    // ==========================================================
+
+    // Suspend
+    Mod+Shift+Escape { spawn "systemctl" "suspend"; }
+
+    // Niri konfig újratöltése
+    Alt+R hotkey-overlay-title="Reload Niri Config" {
+        spawn "bash" "-c" "niri msg action reload-config && notify-send 'Niri' 'Config reloaded' -u low -t 2000";
+    }
+
+
+    // ==========================================================
+    // 11) NIRI-SPECIFIKUS
+    // ==========================================================
+
+    // Overview
+    Mod+Tab { toggle-overview; }
+    Mod+N { spawn "bash" "-c" "~/.config/niri/main/Blur/blur_swap.sh"; }
+}

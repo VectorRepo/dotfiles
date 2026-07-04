@@ -1,0 +1,37 @@
+// ============================================================
+// ~/.config/niri/config.kdl — FŐFÁJL (ne szerkeszd közvetlenül)
+// ============================================================
+
+
+// --- Monitor ---
+include "main/monitor.kdl"
+
+// --- Environment Variables ---
+include "main/environment.kdl"
+
+// --- Input ---
+include "main/input.kdl"
+
+// --- Appearance (layout, opacity, corner radius, animations) ---
+include "main/appearance.kdl"
+
+// --- Focus Ring colors (Matugen generated symlink) ---
+include "main/niri-colors.kdl"
+
+// --- Blur
+include "main/blur.kdl"
+
+// --- Window & Layer Rules ---
+include "main/rules.kdl"
+
+// --- Keybinds ---
+include "main/binds.kdl"
+
+// --- Autostart ---
+include "main/autostart.kdl"
+
+debug {
+    render-drm-device "/dev/dri/renderD128"
+    // ignore-drm-device "/dev/dri/renderD128"
+}
+

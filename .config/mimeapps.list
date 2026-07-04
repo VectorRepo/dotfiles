@@ -1,0 +1,16 @@
+[Default Applications]
+application/xhtml+xml=zen.desktop
+x-scheme-handler/http=zen.desktop
+x-scheme-handler/https=zen.desktop
+text/html=zen.desktop
+application/xhtml+xml=zen.desktop
+application/x-extension-html=zen.desktop
+application/x-extension-xhtml=zen.desktop
+application/x-extension-shtml=zen.desktop
+application/x-extension-xht=zen.desktop
+application/x-extension-htm=zen.desktop
+image/png=swayimg.desktop
+image/jpeg=swayimg.desktop
+image/webp=swayimg.desktop
+video/mp4=mpv.desktop
+video/x-matroska=mpv.desktop

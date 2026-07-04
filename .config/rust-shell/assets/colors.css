@@ -1,0 +1,14 @@
+@define-color background              #1f0f0d;
+@define-color on_background           #fcdbd7;
+
+@define-color surface_container       #2d1b19;
+@define-color surface_container_high  #382523;
+
+@define-color primary                 #ffb4a9;
+@define-color on_primary              #690002;
+
+@define-color secondary               #ffb4a9;
+@define-color on_secondary            #660605;
+
+@define-color outline                 #ad8883;
+@define-color shadow                  #000000;

@@ -1,0 +1,40 @@
+{
+  "bar": {
+    "position": "top",
+    "height": 25,
+    "margin": 10,
+    "monitor": "HDMI-A-1"
+  },
+  "widgets": {
+    "clock": {
+      "enabled": true,
+      "format": "%H:%M"
+    },
+    "workspaces": {
+      "enabled": false,
+      "position": "left"
+    },
+    "power": {
+      "enabled": false,
+      "position": "right"
+    },
+    "tray": {
+      "enabled": true,
+      "position": "right"
+    },
+    "audio": {
+      "enabled": true,
+      "position": "center"
+    },
+    "notifications": {
+      "enabled": true,
+      "position": "center"
+    }
+  },
+  "theme": {
+    "css_path": "assets/style.css"
+  },
+  "weather": {
+    "city": "Zalaegerszeg"
+  }
+}

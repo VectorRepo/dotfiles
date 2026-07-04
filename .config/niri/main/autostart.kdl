@@ -1,0 +1,38 @@
+// ============================================================
+// ~/.config/niri/main/autostart.kdl
+// ============================================================
+
+// --- 0) SYSTEMD ENVIRONMENT SYNC (KRITIKUS — LEGYEN ELÖL) ---
+spawn-at-startup "bash" "-c" "systemctl --user import-environment && dbus-update-activation-environment --systemd --all"
+
+// --- 1) XHOST — root GUI app support ---
+spawn-at-startup "xhost" "+si:localuser:root"
+
+// --- 2) KEYRING ---
+spawn-at-startup "bash" "-c" "systemctl --user start gnome-keyring-daemon.service"
+
+// --- 3) POLKIT AGENT ---
+spawn-at-startup "bash" "-c" "systemctl --user start polkit-gnome.service"
+
+// --- 5) VÁGÓLAP ---
+spawn-at-startup "bash" "-c" "wl-paste --type text --watch cliphist store"
+spawn-at-startup "bash" "-c" "wl-paste --type image --watch cliphist store"
+
+// --- 6) NOTIFICATION DAEMON
+spawn-at-startup "swaync"
+
+// --- 7) SHELL + WALLPAPER ---
+spawn-at-startup "skwd-daemon"
+spawn-at-startup "rust-shell"
+
+// -------------------------------------------------------
+// Alternatívák / kommentált opciók
+// -------------------------------------------------------
+// Ha nem systemd-vel akarod az idle-t:
+// spawn-at-startup "swayidle" "-w"
+//     "timeout" "300" "loginctl lock-session"
+//     "timeout" "600" "systemctl suspend"
+//     "before-sleep" "loginctl lock-session"
+//
+// Network tray (ha kell):
+// spawn-at-startup "nm-applet"

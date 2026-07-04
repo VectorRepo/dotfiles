@@ -1,0 +1,47 @@
+// ============================================================
+// ~/.config/niri/main/environment.kdl
+// ============================================================
+
+environment {
+    // --- Session / Portals ---
+    XDG_CURRENT_DESKTOP "niri"
+    XDG_SESSION_TYPE    "wayland"
+    XDG_SESSION_DESKTOP "niri"
+    GTK_USE_PORTAL      "1"
+
+    // --- Cursor ---
+    XCURSOR_THEME "Bibata-Modern-Classic"
+    XCURSOR_SIZE  "24"
+
+    // --- Qt ---
+    QT_QPA_PLATFORM                     "wayland"
+    QT_QPA_PLATFORMTHEME                "gtk3"
+    QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
+    QT_AUTO_SCREEN_SCALE_FACTOR         "1"
+
+    // --- GTK ---
+    // GDK_BACKEND     "wayland,x11"
+    GDK_BACKEND     "wayland"
+    CLUTTER_BACKEND "wayland"
+    GDK_SCALE       "1"
+
+    // --- Browser ---
+    MOZ_ENABLE_WAYLAND "1"
+
+    // --- Electron / Chromium ---
+    ELECTRON_OZONE_PLATFORM_HINT "auto"
+
+    // --- Java AWT ---
+    _JAVA_AWT_WM_NONREPARENTING "1"
+
+    // --- Quickshell reload popup ---
+    QS_NO_RELOAD_POPUP "1"
+
+    // -------------------------------------------------------
+    // Hardware-specifikus (KOMMENTÁLVA — csak ha kell)
+    // -------------------------------------------------------
+    LIBVA_DRIVER_NAME "radeonsi"
+    // NVIDIA:            __GLX_VENDOR_LIBRARY_NAME "nvidia"
+    // NVIDIA GBM:        GBM_BACKEND "nvidia-drm"
+    // NVIDIA cursor fix: WLR_NO_HARDWARE_CURSORS "1"
+}

@@ -1,0 +1,15 @@
+// ============================================================
+// ~/.config/matugen/templates/niri-colors.kdl
+// ============================================================
+
+layout {
+    focus-ring {
+        width 2
+        active-color   "#7ce840"
+        inactive-color "#89947e"
+    }
+
+    border {
+        off
+    }
+}

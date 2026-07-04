@@ -1,0 +1,147 @@
+// ============================================================
+// ~/.config/niri/main/rules.kdl
+// Window rules + Layer rules
+// ============================================================
+
+layer-rule {
+    match namespace="skwd-paper"
+    place-within-backdrop true
+}
+
+// ============================================================
+// 1) JÁTÉKOK — opacity 1.0
+// ============================================================
+
+window-rule {
+    match app-id=r#"^steam_app_"#
+    opacity 1.0
+}
+
+window-rule {
+    match title=r#"(?i).*minecraft.*"#
+    opacity 1.0
+}
+
+// ============================================================
+// 3) PICTURE-IN-PICTURE
+// ============================================================
+
+window-rule {
+    match title=r#"(?i)^[Pp]icture.?[Ii]n.?[Pp]icture"#
+    open-floating true
+    default-column-width { fixed 248; }
+    opacity 1.0
+}
+
+
+// ============================================================
+// X) DOUBLE COMMANDER — popupok floatingba a főablak felett
+// ============================================================
+
+window-rule {
+    match app-id="^doublecmd$"
+    exclude title=r#"^Double Commander \d"#
+    open-floating true
+}
+
+
+// ============================================================
+// 4) DIALÓGUSOK / PORTÁLOK
+// ============================================================
+
+window-rule {
+    match title=r#"^(Open File|Open Folder|Save As|Select a File|Choose Files|File Upload|Authentication Required|File Operation Progress|Library)"#
+    open-floating true
+    default-column-width { fixed 816; }
+}
+
+window-rule {
+    match app-id=r#"^(xdg-desktop-portal-gtk|org\.freedesktop\.impl\.portal\.desktop\.)"#
+    open-floating true
+    default-column-width { fixed 816; }
+}
+
+
+// ============================================================
+// 5) STEAM CLIENT
+// ============================================================
+
+window-rule {
+    match app-id="^steam$" title="^Friends List$"
+    open-floating true
+    default-column-width { fixed 680; }
+}
+
+window-rule {
+    match app-id="^steam$" title="^Special Offers$"
+    open-floating true
+    default-column-width { fixed 706; }
+}
+
+
+// ============================================================
+// 6) SEGÉDPROGRAMOK
+// ============================================================
+
+window-rule {
+    match app-id=r#"^(pavucontrol|org\.pulseaudio\.pavucontrol)$"#
+    open-floating true
+    default-column-width { fixed 643; }
+}
+
+window-rule {
+    match app-id="^nm-connection-editor$"
+    open-floating true
+    default-column-width { fixed 432; }
+}
+
+window-rule {
+    match app-id=r#"^(qt6ct|qt5ct|kvantummanager|nwg-look)$"#
+    open-floating true
+}
+
+// ============================================================
+// 7) GNOME ALKALMAZÁSOK
+// ============================================================
+
+window-rule {
+    match app-id=r#"^org\.gnome\."#
+    draw-border-with-background false
+    geometry-corner-radius 12
+    clip-to-geometry true
+}
+
+
+// ============================================================
+// 8) TERMINÁLOK
+// ============================================================
+
+window-rule {
+    match app-id="^kitty$"
+    draw-border-with-background false
+}
+
+window-rule {
+    match app-id="^Alacritty$"
+    draw-border-with-background false
+}
+
+window-rule {
+    match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    draw-border-with-background false
+}
+
+
+// ============================================================
+// 9) LAYER RULES
+// ============================================================
+
+layer-rule {
+    match namespace="selection"
+    block-out-from "screencast"
+}
+
+layer-rule {
+    match namespace="logout_dialog"
+    place-within-backdrop true
+}

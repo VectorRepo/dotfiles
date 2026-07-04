@@ -1,0 +1,103 @@
+/* FIX: Teljes abszolút elérési út, így bárhonnan indíthatod a Wofi-t */
+@import url('/home/adam/.config/wofi/wofi-colors.css');
+
+/* Globális betűtípus */
+* {
+  font-family: 'JetBrains Mono Nerd Font', monospace;
+  font-size: 13px;
+}
+
+/* Főablak (Window) */
+window {
+  background-color: @background;
+  border: none;
+  border-radius: 20px; /* Eredeti 20px-es ablak-lekerekítés */
+}
+
+/* Belső doboz konténer (Main Box) */
+#outer-box {
+  background-color: transparent;
+  padding: 0px;
+  margin: 0px;
+}
+
+/* Inputbar (A nagy felső fejléc zóna) */
+#input {
+  background-color: transparent;
+  padding: 80px 60px; /* Tágas, nagy belső margó a fejlécnek */
+  margin: 0px;
+  border: none;
+  border-radius: 0px;
+
+  /* A háttérkép, ami teljesen kitölti a felső sávot */
+  background-image: url('/home/adam/.cache/skwd-wall/wallpaper/current.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  color: @foreground;
+}
+
+/* Maga a beviteli mező konténere (Entry / Keresősáv pilula) */
+#input text {
+  background-color: @background-alt;
+  padding: 12px 24px; /* Adunk neki egy kényelmes belső margót */
+  border-radius: 100px; /* Teljesen kerek, pilula forma */
+  color: @foreground;
+  margin: 0px;
+}
+
+/* FIX: GTK kompatibilis elem-eltüntetés 'display: none' helyett */
+#input image {
+  opacity: 0;
+  font-size: 0px;
+  padding: 0px;
+  margin: 0px;
+  min-width: 0px;
+  min-height: 0px;
+}
+
+/* Listbox (A találati lista konténere) */
+#scroll {
+  margin: 20px; /* Eredeti 20px padding a lista körül */
+  background-color: transparent;
+  border: none;
+}
+
+#text {
+  color: @foreground;
+}
+
+/* Találati elemek (Elements) */
+#entry {
+  padding: 8px 12px;
+  margin: 4px 0px;
+  border-radius: 100px; /* Az elemek is teljesen le vannak kerekítve pilula formára */
+  background-color: transparent;
+  outline: none;
+  box-shadow: none;
+}
+
+/* Elemek feletti egérmozgás (Hover) */
+#entry:hover {
+  background-color: @background-alt;
+  outline: none;
+}
+
+/* Kiválasztott elem (Selected) */
+#entry:selected {
+  background-color: @selected;
+  outline: none;
+  box-shadow: none;
+}
+
+#entry:selected #text {
+  color: @background; /* Kontrasztos sötét szöveg a kijelölt elemen az olvashatóságért */
+  font-weight: bold;
+}
+
+/* Alkalmazás ikonok a listában */
+#img {
+  margin-right: 12px;
+  background-color: transparent;
+}

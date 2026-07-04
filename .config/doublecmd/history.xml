@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doublecmd>
+  <History>
+    <Navigation>
+      <Item Value="/home/adam/.local/bin/"/>
+      <Item Value="/home/adam/.local/"/>
+      <Item Value="/home/adam/.local/share/"/>
+      <Item Value="/run/media/adam/New Volume/Linux/NiriV2/Dotfile_niri/.local/bin/"/>
+      <Item Value="/run/media/adam/New Volume/Linux/NiriV2/Dotfile_niri/.local/"/>
+      <Item Value="/home/adam/"/>
+      <Item Value="/run/media/adam/New Volume/Linux/NiriV2/Dotfile_niri/"/>
+      <Item Value="/run/media/adam/New Volume/Linux/NiriV2/Dotfile_niri/.config/"/>
+      <Item Value="/run/media/adam/New Volume/Linux/NiriV2/Dotfile_niri/.config/nvim/"/>
+      <Item Value="/run/media/adam/New Volume/Linux/NiriV2/Dotfile_niri/.config/nvim/lua/"/>
+      <Item Value="/run/media/adam/New Volume/Linux/NiriV2/Dotfile_niri/.config/nvim/lua/plugins/"/>
+      <Item Value="/home/adam/Downloads/rust-shell/"/>
+      <Item Value="/home/adam/Downloads/"/>
+      <Item Value="/home/adam/.config/nvim/lua/plugins/"/>
+      <Item Value="/home/adam/.config/nvim/lua/"/>
+      <Item Value="/home/adam/.config/nvim/"/>
+      <Item Value="/home/adam/.config/"/>
+      <Item Value="/run/media/adam/New Volume/Linux/NiriV2/"/>
+      <Item Value="/home/adam/.local/share/Trash/"/>
+      <Item Value="/home/adam/.local/share/Trash/files/"/>
+      <Item Value="/home/adam/.config/skwd-wall/"/>
+      <Item Value="/home/adam/.config/skwd-wall/data/"/>
+      <Item Value="/home/adam/.config/skwd-wall/data/matugen/"/>
+      <Item Value="/run/media/adam/New Volume/Linux/NiriV2/Dotfile_niri/.config/skwd-wall/"/>
+      <Item Value="/run/media/adam/New Volume/Linux/NiriV2/Dotfile_niri/.config/skwd-wall/data/"/>
+      <Item Value="/run/media/adam/New Volume/Linux/NiriV2/Dotfile_niri/.config/skwd-wall/data/matugen/"/>
+      <Item Value="/home/adam/.config/skwd-wall/data/matugen/templates/"/>
+      <Item Value="/run/media/adam/New Volume/Linux/NiriV2/Dotfile_niri/.config/skwd-wall/data/matugen/templates/"/>
+      <Item Value="/home/adam/.cache/skwd-wall/wallpaper/./"/>
+      <Item Value="/home/adam/Downloads/rust-shell/src/"/>
+      <Item Value="/home/adam/.config/swaync/"/>
+      <Item Value="/home/adam/.config/nvim/lua/config/"/>
+      <Item Value="/home/adam/skwd-wall/"/>
+      <Item Value="/home/adam/skwd-wall/data/"/>
+      <Item Value="/home/adam/skwd-wall/data/matugen/"/>
+      <Item Value="/home/adam/skwd-wall/data/matugen/templates/"/>
+      <Item Value="/home/"/>
+      <Item Value="/home/adam/.config/rust-shell/"/>
+      <Item Value="/home/adam/.config/rust-shell/assets/"/>
+      <Item Value="/home/adam/.config/matugen/templates/"/>
+      <Item Value="/home/adam/.config/matugen/"/>
+      <Item Value="/run/media/adam/New Volume/Linux/NiriV2/Dotfile_niri/Pictures/"/>
+      <Item Value="/run/media/adam/New Volume/Linux/NiriV2/Dotfile_niri/.config/rust-shell/"/>
+      <Item Value="/run/media/adam/New Volume/Linux/NiriV2/Dotfile_niri/.config/rust-shell/assets/"/>
+      <Item Value="/run/media/adam/New Volume/Linux/NiriV2/Dotfile_niri/.config/matugen/"/>
+      <Item Value="/run/media/adam/New Volume/Linux/NiriV2/Dotfile_niri/.config/matugen/templates/"/>
+      <Item Value="/run/media/adam/New Volume/Linux/"/>
+      <Item Value="/run/media/adam/New Volume/"/>
+      <Item Value="/run/media/adam/New Volume/$RECYCLE.BIN/"/>
+      <Item Value="/run/media/adam/New Volume/Linux/NiriV2/Dotfile_niri/.config/niri/"/>
+    </Navigation>
+    <CommandLine/>
+    <FileMask>
+      <Item Value="*.*"/>
+    </FileMask>
+    <VolumeSize/>
+    <CreateDirectories>
+      <Item Value="bin" Tag="0"/>
+      <Item Value=".local" Tag="0"/>
+      <Item Value="BACKUP" Tag="0"/>
+      <Item Value="images" Tag="0"/>
+      <Item Value="RustShell" Tag="0"/>
+      <Item Value="Games" Tag="0"/>
+    </CreateDirectories>
+    <SearchText/>
+    <SearchTextPath/>
+    <ReplaceText/>
+    <ReplaceTextPath/>
+    <RenameNameMask/>
+    <RenameExtMask/>
+    <SearchDirectories/>
+    <SearchExcludeFiles/>
+    <SearchExcludeDirectories/>
+  </History>
+</doublecmd>

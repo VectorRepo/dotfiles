@@ -1,0 +1,555 @@
+@import url('colors.css');
+
+window {
+  background-color: transparent;
+}
+.text-font,
+.clock-label,
+.qs-label,
+.qs-tile-label,
+.tray-menu-item,
+.notif-badge,
+tooltip > label {
+  font-family: 'Fira Sans Semibold', 'Fira Sans', sans-serif;
+}
+
+#pill {
+  background-color: transparent;
+  background-image:
+    linear-gradient(alpha(@surface_container, 0.88), alpha(@surface_container, 0.88)),
+    linear-gradient(to bottom, @primary, @on_primary);
+  background-origin: padding-box, border-box;
+  background-clip: padding-box, border-box;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  /* 4px 16px helyett szűkebb: 3px 12px - a pill szorosabban a tartalomra
+     simul collapsed állapotban (quickshell-es "hug content" érzet). */
+  padding: 3px 12px;
+  /* 36px helyett 32px - a kisebbre vett gombokhoz (24px, ld. .icon-btn)
+     igazítva, hogy ne maradjon fölösleges üres sáv a gomb körül. */
+  min-height: 32px;
+  /* 170px helyett 150px - a kisebb gombok (24px) és szűkebb padding miatt
+     ennyi elég a center tartalomnak (audio gomb + harang gomb + óra). Ha
+     widgetet vesz ki/tesz be a center-ből, ezt kézzel kell igazítani. */
+  min-width: 150px;
+
+  transition:
+    min-width 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-image 300ms ease;
+}
+
+/* ── PILL expanded ────────────────────────────────────────────────────── */
+/*
+  Mivel a `center` fix középpont körül van (nem a pill széléhez igazítva),
+  a `right` (lock/logout/restart/shutdown, ill. power/return gomb + tray)
+  és a `center` közti tényleges rés a pill TELJES kinyitott szélességétől
+  függ: minél szélesebb a pill, annál messzebb kerül a jobbra igazított
+  `right` doboz a középre igazított `center`-től. 480px-nél ez a rés túl
+  kicsi volt (a jobb oldali gombcsoport majdnem hozzáért az órához) - ezért
+  emeltük fel 560px-re. Ha új jobb oldali widget kerül be (pl. több tray
+  ikon), ezt is érdemes lehet tovább növelni.
+*/
+#pill.pill-expanded {
+  min-width: 560px;
+  /* background-color helyett itt is a background-image belső rétegét kell
+     felülírni (ld. #pill fent) - a gradiens külső réteg (border-image
+     helyett használt trükk) változatlan marad, csak a pill tényleges
+     kitöltőszíne vált sötétebb/erősebb alpha-ra nyitott állapotban. */
+  background-image:
+    linear-gradient(alpha(@surface_container_high, 0.96), alpha(@surface_container_high, 0.96)),
+    linear-gradient(to bottom, @primary, @on_primary);
+}
+
+/* ── Left/right overlay szekciók ─────────────────────────────────────── */
+/*
+  Collapsed: opacity 0 → láthatatlan, de overlay-ként NEM tolja el az órát.
+  Expanded: opacity 1 → látható.
+*/
+.pill-left,
+.pill-right {
+  opacity: 0;
+  transition: opacity 150ms ease 0ms;
+}
+
+#pill.pill-expanded .pill-left,
+#pill.pill-expanded .pill-right {
+  opacity: 1;
+  transition: opacity 150ms ease 80ms;
+}
+
+/* ── Óra + audio/bell gombok a pill közepén ─────────────────────────────
+   Ez a klaszter (audio, harang, óra) egy külön rétegen ül, a pill FÖLÖTT,
+   és mindig látszik - akkor is, ha a pill össze van menve, és akkor is,
+   ha nyitva van a power menü (ld. main.rs `center` létrehozásánál lévő
+   kommentet). Az audio és harang gombok ugyanazt az `.icon-btn` classt
+   használják, mint a lock/logout/restart/shutdown gombok, hogy egységes
+   maradjon a kinézetük. */
+.clock-label {
+  color: @primary;
+  font-weight: 700;
+  font-size: 15px;
+  /* font-family: .text-font (Fira Sans Semibold) - ld. fent */
+}
+
+/* Az értesítés-badge (olvasatlan darabszám) a harang gomb jobb-felső
+   sarkába lóg ki. Szándékosan fix, a témától független piros - ugyanaz az
+   "ez figyelmet igényel" logika, mint a danger-btn hover/active
+   színeinél -, hogy bármilyen Matugen paletta mellett is jól látszódjon. */
+.notif-badge {
+  background-color: #ff5555;
+  color: #ffffff;
+  /* font-family: .text-font (Fira Sans Semibold) - ld. fent, ez sima
+     szám ("1", "9+"), nem glyph, nyugodtan mehet a szöveges fontra */
+  font-size: 10px;
+  font-weight: 700;
+  min-width: 15px;
+  min-height: 15px;
+  border-radius: 999px;
+  padding: 0 3px;
+  margin-top: 1px;
+  margin-right: 1px;
+  border: 1px solid alpha(@surface_container, 0.9);
+}
+
+/* ── Icon gombok ──────────────────────────────────────────────────────── */
+/*
+  A hover/active itt a quickshell-es "knockout" stílust követi: nem egy
+  finom alpha-tint, hanem a kör TELJESEN kitöltődik @primary-vel, és az
+  ikon a háttérszínre (@on_primary, ami a @primary-hez tartozó sötét/
+  tompa Material3 pár - ld. colors.css) vált, hogy kontrasztos maradjon
+  a tömör kitöltésen. A 300ms-es, lassabb átmenet (a quickshell 500ms-es
+  ColorAnimation-jéhez közelítve, de a pill-eink gyorsabb, 150ms-es
+  ritmusához igazítva) adja a "puha becsúszás" érzetet éles váltás
+  helyett.
+*/
+/* Az SVG-átállás óta (ld. icons.rs) az `.icon-btn` osztályú gombok
+   (lock/logout/restart/shutdown/power/return/quick-settings) tartalma egy
+   `Image` (raszterizált, előre-megfestett SVG-textúra), NEM egy Nerd Font
+   glyph-Label - a `color`/`font-*` tulajdonságok emiatt rájuk már nem
+   hatnak (egy Image textúráját a GTK CSS nem tudja átfesteni), a tényleges
+   szín/hover-váltást a Rust oldal végzi (ld. icons.rs `make_icon_btn_svg`).
+   Ittmaradtak, hogy egy jövőbeli, glyph-alapú `.icon-btn` is helyesen
+   nézzen ki, ha valaha visszatérnénk erre a mintára. */
+.icon-btn {
+  background: none;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  padding: 3px;
+  min-width: 20px;
+  min-height: 20px;
+  border-radius: 50%;
+  color: @on_background;
+  font-family: 'JetBrainsMono Nerd Font', monospace;
+  font-size: 20px;
+  transition:
+    background-color 300ms ease,
+    color 300ms ease;
+}
+
+/* A hátteret SZÁNDÉKOSAN a `.hovered` class vezérli, NEM a natív `:hover`
+   pszeudo-osztály (ld. icons.rs `make_icon_btn_svg` kommentje) - ha egy
+   Popover van a gombra "parentelve" (ld. a Quick Settings fogaskerék
+   gombját, quicksettings.rs), a GTK a popover nyitva-léte alatt a gombot
+   is `:hover`-ben tartja, függetlenül attól, hogy a kurzor ténylegesen a
+   popover fölött van-e. Natív `:hover`-rel ez azt eredményezné, hogy a
+   háttér kitöltött marad, miközben az ikon (ami a saját, Rust-oldali
+   `hovered` állapotot követi) már visszavált a normál színre - a két
+   egybeeső primary-szín miatt az ikon eltűnne. A `.hovered` class
+   ugyanabból az `EventControllerMotion` enter/leave párból jön, mint az
+   ikon repaint-je, ezért a kettő sosem futhat szét. */
+.icon-btn.hovered {
+  background-color: @primary;
+  color: @on_primary;
+}
+
+/* SZÁNDÉKOSAN nincs itt `.icon-btn:active` szabály. A natív `:active`
+   pszeudo-osztály ugyanúgy "beragad" a gombra, mint korábban a `:hover`
+   (ld. fent) - ha egy Popover van a gombra "parentelve" (ld. a Quick
+   Settings fogaskerék gombját), a popover BELSEJÉBEN történő kattintás is
+   rövid időre `:active`-nek jelöli meg a szülő gombot, ami egy zavaró
+   háttér-felvillanást okoz rajta. Mivel a gomb ilyenkor amúgy is
+   `.hovered` (ld. fent) - normál kattintáskor a kurzor a gombon van -,
+   a hover-háttér önmagában elég vizuális visszajelzés, külön "megnyomva"
+   állapotra nincs szükség. */
+
+/* A danger-btn (shutdown/power) ugyanezt a teljes-kitöltés elvet követi,
+   csak a saját piros tokenjével - itt szándékosan nincs Material3
+   "on_danger" token, ezért marad a fehér, ami minden piros árnyalaton
+   jól olvasható. */
+.danger-btn:hover {
+  background-color: #ff5555;
+  color: #ffffff;
+}
+
+.danger-btn:active {
+  background-color: #ff5555;
+  color: #ffffff;
+}
+
+#return-btn {
+  color: alpha(@on_background, 0.55);
+  font-size: 13px;
+}
+
+#return-btn:hover {
+  background-color: @on_background;
+  color: @background;
+}
+
+/* ── Tray ─────────────────────────────────────────────────────────────── */
+.tray {
+  /* a gombok maguktól kapják a spacinget a right box "4"-es gap-jéből */
+}
+
+/* Szándékosan UGYANAKKORA (24×24px), mint a `.icon-btn` (harang, Quick
+   Settings gomb, lock/logout/stb.) - korábban eltérő méret volt, ami miatt a
+   tray-ikonok néhány pixellel kisebbek/máshol középre igazítottak voltak,
+   mint a center/right szekció többi gombja. Emiatt nemcsak vizuálisan
+   "lépcsőztek" a gombok, hanem a jobbklikk context-menü (ld. tray.rs
+   show_tray_menu) és a Quick Settings popover (ld. quicksettings.rs) is
+   más-más magasságban nyílt, hiába ugyanaz a `PositionType::Bottom` +
+   offset mindkettőn - a popover ugyanis a SAJÁT gombjának aljához
+   igazodik, és egy kisebb gomb alja más y-koordinátán van. */
+.tray-icon-btn {
+  background: none;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  padding: 3px;
+  min-width: 20px;
+  min-height: 20px;
+  border-radius: 50%;
+  transition: background-color 150ms ease;
+}
+
+.tray-icon-btn image {
+  /* 16px helyett 14px, arányban az új 24px gombmérettel */
+  -gtk-icon-size: 20px;
+}
+
+.tray-icon-btn:hover {
+  background-color: alpha(@primary, 0.18);
+}
+
+.tray-icon-btn:active {
+  background-color: alpha(@primary, 0.32);
+}
+
+/* ── Tray context-menü (jobb klikk) + Quick Settings popover ─────────────
+   A GTK4 Popover belső widgetje a `contents` node — ide kell tenni a
+   hátteret/keretet/árnyékot, nem magára a `popover`-re. A `.tray-menu-
+   popover` classot mind a root, mind az almenü Popover-ek megkapják
+   (ld. tray.rs), ÉS a Quick Settings popover is (ld. quicksettings.rs) -
+   így mindhárom helyen egységes, "egy panel-nyelvet beszélő" a kinézet.
+
+   A korábbi 10px sugarú, lapos verzióhoz képest nagyobb (14px) lekerekítés
+   és mélyebb, kétrétegű árnyék (egy közeli, éles + egy távoli, puha) adja
+   a "lebegő panel" modern hatást ahelyett, hogy a menü a bar egyszerű
+   folytatásának tűnne. */
+.tray-menu-popover > contents {
+  background-color: alpha(@surface_container_high, 0.98);
+  border: 1px solid alpha(@outline, 0.22);
+  border-radius: 14px;
+  padding: 8px;
+  box-shadow:
+    0 1px 2px alpha(@shadow, 0.3),
+    0 10px 28px alpha(@shadow, 0.4);
+}
+
+.tray-menu {
+  min-width: 190px;
+}
+
+.tray-menu-item {
+  background: none;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  padding: 8px 12px;
+  border-radius: 9px;
+  color: @on_background;
+  /* font-family: .text-font (Fira Sans Semibold) - ld. fent, valódi
+     alkalmazás-/menünevek, nem glyph */
+  font-size: 13px;
+  transition:
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+.tray-menu-item > label {
+  color: inherit;
+}
+
+.tray-menu-item:hover {
+  background-color: alpha(@primary, 0.16);
+  color: @primary;
+}
+
+.tray-menu-item:active {
+  background-color: alpha(@primary, 0.3);
+}
+
+.tray-menu-item:disabled {
+  color: alpha(@on_background, 0.4);
+}
+
+.tray-menu separator {
+  min-height: 1px;
+  background-color: alpha(@outline, 0.22);
+  margin: 6px 8px;
+}
+
+/* ── Quick Settings popover tartalma ──────────────────────────────────────
+   A háttér/keret/árnyék a fenti `.tray-menu-popover > contents` szabályból
+   jön (a popover mindkét classot megkapja) - itt csak a panel saját,
+   Android Quick Settings-ihletésű tartalmát (csúszka-kártya + csempe-rács,
+   ld. quicksettings.rs) stílusozzuk. */
+.quick-settings-popover .qs-content {
+  min-width: 260px;
+  padding: 2px;
+}
+
+/* ── Csúszka-kártya (hangerő + fényerő) ───────────────────────────────────
+   A folytonos értékű vezérlőket egy közös, halványan kiemelt "surface"
+   felületbe csoportosítjuk - ez adja azt az androidos érzetet, hogy a
+   panel nem egyetlen sík lista, hanem elkülönülő, kártyaszerű szekciókból
+   épül fel. A kártya belül nem kap külön keretet/árnyékot (a popover
+   saját, külső árnyéka - ld. `.tray-menu-popover > contents` - elég
+   mélységet ad), csak egy árnyalatnyit világosabb hátteret. */
+.qs-slider-card {
+  background-color: alpha(@surface_container, 0.55);
+  border-radius: 12px;
+  padding: 2px 4px;
+}
+
+.qs-row {
+  padding: 7px 8px;
+  border-radius: 9px;
+  transition: background-color 120ms ease;
+}
+
+/* Finom hover-visszajelzés az egész soron - ugyanaz a nyelv, mint a
+   tray-menü elemein, hogy a panel egy családba tartozzon, még akkor is,
+   ha a sor egyes részei (csúszka) saját hoverrel rendelkeznek. */
+.qs-row:hover {
+  background-color: alpha(@primary, 0.08);
+}
+
+/* A fényerő-sor ikonja egy sima (nem kattintható) `Image` - az SVG-átállás
+   óta (ld. icons.rs) a tényleges SZÍNT már NEM ez a `color:` tulajdonság
+   adja (egy raszterizált Image textúráját a GTK CSS nem tudja átfesteni),
+   hanem a Rust oldal égeti bele a colors.css megfelelő hex-értékét a
+   textúrába - ez a szabály itt csak a layout (min-width, hogy a hangerő-
+   és fényerő-sor ikon-oszlopa egy vonalba essen) miatt maradt. */
+.qs-icon {
+  min-width: 20px;
+}
+
+/* A némítás-ikon a `.qs-icon`-t ÉS ezt a kiegészítő classt is megkapja
+   (ld. quicksettings.rs) - de az SVG-átállás óta ez most egy `Button`
+   (nem `Label`, mint korábban), ami egy `Image`-et tartalmaz. A GTK
+   alapértelmezett gomb-keretét/hátterét/paddingjét itt nullázzuk, hogy
+   vizuálisan ugyanúgy nézzen ki, mint egy sima ikon (mint a fényerő-sor
+   ikonja) - csak épp kattintható legyen. A tényleges hover-szín-váltást
+   (`@primary`-re) is a Rust oldal végzi (ld. icons.rs `repaint_icon`
+   hívása a `build_volume_row`-ban) - a `:hover` CSS szabály itt már csak
+   dokumentációs értékű, ténylegesen nem ez fest.
+*/
+.qs-icon-clickable {
+  background: none;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  padding: 0;
+  min-width: 20px;
+  min-height: 20px;
+}
+
+.qs-label {
+  color: @on_background;
+  /* font-family: .text-font (Fira Sans Semibold) - ld. fent */
+  font-size: 13px;
+}
+
+/* GTK4 Scale belső node-jai: trough (sín) + highlight (kitöltött rész) +
+   slider (fogantyú) - mindhármat a téma primary/outline színeire állítjuk,
+   hogy illeszkedjen a pill/tray-menü palettájához. Kicsit vastagabb sín és
+   nagyobb fogantyú a korábbi verzióhoz képest, hogy jobban kézre álljon és
+   ne tűnjön "vékonynak"/prototípus-szerűnek. */
+.qs-slider trough {
+  min-height: 8px;
+  border-radius: 999px;
+  background-color: alpha(@outline, 0.3);
+}
+
+.qs-slider trough highlight {
+  min-height: 8px;
+  border-radius: 999px;
+  background-color: @primary;
+}
+
+.qs-slider slider {
+  min-width: 16px;
+  min-height: 16px;
+  border-radius: 50%;
+  background-color: @primary;
+  transition: background-color 120ms ease;
+}
+
+/* ── Csempe-rács (Ne zavarj / Ne aludjon el) ──────────────────────────────
+   Android Quick Settings-mintára: a be/kikapcsolható funkciók nem sorok
+   végén lógó Switch-ek, hanem a TELJES felületükön kattintható, nagy
+   sugarú lekerekítésű "tile"-ok (ld. quicksettings.rs `build_toggle_tile`)
+   egy egyenlő szélességű rácsban. Inaktív állapotban tompa, a popover
+   hátterénél valamivel világosabb surface-tónust kapnak; aktívban a
+   TELJES csempe @primary-vel telítődik - ugyanaz a "knockout" elv, mint
+   az `.icon-btn:hover`-nél (ld. fent), csak itt az állapot nem hover,
+   hanem tartós be/kikapcsolt érték, ezért nem is szűnik meg, ha a kurzor
+   arrébb megy. */
+.qs-tile-grid {
+  margin-top: 2px;
+}
+
+.qs-tile {
+  background-color: alpha(@surface_container_high, 0.85);
+  border: 1px solid alpha(@outline, 0.14);
+  border-radius: 16px;
+  box-shadow: none;
+  outline: none;
+  padding: 10px 6px;
+  min-height: 62px;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.qs-tile:hover {
+  background-color: alpha(@surface_container_high, 1);
+  border-color: alpha(@primary, 0.35);
+}
+
+.qs-tile:active {
+  background-color: alpha(@primary, 0.22);
+}
+
+.qs-tile.active {
+  background-color: @primary;
+  border-color: @primary;
+}
+
+/* Bekapcsolt csempén finomabb, sötétítő hover (nem a normál "megjelenik a
+   primary" hatás, hiszen az már eleve aktív) - ez jelzi, hogy a csempe
+   ilyenkor is kattintható marad (kikapcsolásra). */
+.qs-tile.active:hover {
+  background-color: alpha(@primary, 0.88);
+}
+
+.qs-tile-icon {
+  color: @primary;
+  font-family: 'JetBrainsMono Nerd Font', monospace;
+  font-size: 19px;
+  transition: color 180ms ease;
+}
+
+.qs-tile-label {
+  color: @on_background;
+  /* font-family: .text-font (Fira Sans Semibold) - ld. fent (a szelektor-
+     listában is szerepel) */
+  font-size: 11px;
+  font-weight: 700;
+  transition: color 180ms ease;
+}
+
+/* Aktív csempén az ikon ÉS a felirat is a kontrasztos @on_primary-re vált
+   - ugyanaz a Material3 "filled tonal → filled" pár, mint amit az
+   `.icon-btn:hover` a @primary/@on_primary tokenekkel már használ. */
+.qs-tile.active .qs-tile-icon,
+.qs-tile.active .qs-tile-label {
+  color: @on_primary;
+}
+
+/* ── Óra-popover (naptár + időjárás) ─────────────────────────────────────
+   A háttér/keret/árnyék a `.tray-menu-popover > contents` szabályból jön
+   (ld. fent) - ide csak a saját, kétoszlopos elrendezés és a naptár/
+   időjárás-specifikus stílus kerül. */
+.clock-popover-content {
+  padding: 4px;
+}
+
+/* GTK4 Calendar belső CSS node-jai (day-number, header stb.) örökölnek a
+   témától, de a keretét/hátterét explicit át kell írni, különben a GTK
+   alap (világos) témája ütne el a pill sötét paletájától. */
+.clock-calendar {
+  background-color: transparent;
+  color: @on_background;
+  border-radius: 9px;
+  font-size: 13px;
+}
+
+/* A `:selected` állapotot NEM maga a Calendar widget kapja, hanem a
+   belső `grid`-jében lévő nap-label CSS node (ld. GTK4 Calendar CSS-node
+   dokumentáció: `calendar.view > grid > label`) - ezért a szelektornak a
+   `.clock-calendar` LESZÁRMAZOTTJÁRA kell illeszkednie, nem magára az
+   elemre. Enélkül ez a szabály sosem talált célba, és a rendszer-téma
+   alapértelmezett kék kijelölése látszott a saját @primary/@on_primary
+   páros helyett. */
+.clock-calendar label:selected {
+  background-color: @primary;
+  color: @on_primary;
+  border-radius: 999px;
+}
+
+.clock-calendar.header {
+  color: @primary;
+  font-weight: 700;
+}
+
+.clock-calendar button {
+  color: @on_background;
+  background: none;
+  border-radius: 6px;
+}
+
+.clock-calendar button:hover {
+  background-color: alpha(@primary, 0.16);
+  color: @primary;
+}
+
+.weather-box {
+  padding: 8px 10px;
+}
+
+.weather-icon {
+  color: @primary;
+  font-family: 'JetBrainsMono Nerd Font', monospace;
+  font-size: 34px;
+}
+
+.weather-temp {
+  color: @on_background;
+  /* font-family: .text-font (Fira Sans Semibold) - ld. fent */
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.weather-desc {
+  color: alpha(@on_background, 0.75);
+  /* font-family: .text-font (Fira Sans Semibold) - ld. fent */
+  font-size: 12px;
+}
+
+/* ── Tooltip ──────────────────────────────────────────────────────────── */
+tooltip {
+  background-color: @surface_container_high;
+  border: 1px solid alpha(@outline, 0.4);
+  border-radius: 8px;
+  padding: 4px 8px;
+  box-shadow: 0 2px 8px alpha(@shadow, 0.4);
+}
+
+tooltip > label {
+  color: @on_background;
+  /* font-family: .text-font (Fira Sans Semibold) - ld. fent */
+  font-size: 12px;
+}
