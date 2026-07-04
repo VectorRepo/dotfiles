@@ -37,10 +37,13 @@ window-rule {
 // ============================================================
 // X) DOUBLE COMMANDER — popupok floatingba a főablak felett
 // ============================================================
-
 window-rule {
     match app-id="^doublecmd$"
-    exclude title=r#"^Double Commander \d"#
+    
+    // Ha a címben BÁRHOL szerepel a "Double Commander", akkor NE legyen floating
+    // A (?i) miatt kis- és nagybetű mindegy, a .* pedig kitölti az ablak címét
+    exclude title=r#"(?i).*Double Commander.*"#
+    
     open-floating true
 }
 
