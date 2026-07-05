@@ -310,19 +310,112 @@ tooltip > label {
   padding: 2px;
 }
 
-/* A részletes hangmixer lapnak (ld. quicksettings.rs
+/* A részletes hangeszköz-lapnak (ld. quicksettings.rs
    build_audio_settings_view, page.add_css_class("qs-audio-settings"))
    EDDIG nem volt saját min-width-je - emiatt a lap szélessége a TÉNYLEGES
-   tartalomhoz (a Stack natural width-jéhez) igazodott: üres-állapotban a
-   hosszú "Jelenleg nincs hangot lejátszó alkalmazás" felirat adta a
-   legszélesebb elemet, de amint volt hangot lejátszó alkalmazás, az
-   app-sorok (rövidebb, width_chars(9)-es name_label + kis natural
-   szélességű Scale) natural szélessége ennél kisebb volt, és a panel
-   láthatóan összement. Ugyanazt a rögzített szélességet adjuk neki, mint
-   a főlapnak (`.qs-content`), hogy a panel szélessége FÜGGETLEN legyen
-   attól, fut-e éppen hangot lejátszó program. */
+   tartalomhoz (a Stack natural width-jéhez) igazodott, és attól függően
+   ugrált, hány ki-/bemeneti eszköz van éppen csatlakoztatva. Ugyanazt a
+   rögzített szélességet adjuk neki, mint a főlapnak (`.qs-content`), hogy
+   a panel szélessége FÜGGETLEN legyen az eszközök számától. */
 .quick-settings-popover .qs-audio-settings {
   min-width: 290px;
+}
+
+/* A vissza-gomb + cím alatt egy halvány elválasztó jelzi, hogy a lap
+   innentől egy görgethető, kártyákra tagolt listát tartalmaz - ugyanaz a
+   "panel a panelben" érzet, mint a fő lap `.qs-slider-card`-ja és a lenti
+   csempe-rács között. */
+.qs-audio-settings-header {
+  padding: 2px 4px 8px 4px;
+  margin-bottom: 2px;
+  border-bottom: 1px solid alpha(@outline, 0.16);
+}
+
+.qs-audio-settings-title {
+  color: @on_background;
+  /* font-family: .text-font (Fira Sans Semibold) - ld. fent */
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Egy-egy ki-/bemeneti szekció (cím + eszköz-sorok) kártyába zárva -
+   ugyanaz az androidos "surface" nyelv, mint a fő lap `.qs-slider-card`-ja
+   (ld. lentebb), hogy a részletes hangeszköz-nézet ne tűnjön a fő laptól
+   vizuálisan idegennek. */
+.qs-device-card {
+  background-color: alpha(@surface_container, 0.55);
+  border-radius: 12px;
+  padding: 6px 4px;
+}
+
+.qs-device-card + .qs-device-card {
+  margin-top: 2px;
+}
+
+.qs-section-title {
+  color: alpha(@on_background, 0.55);
+  /* font-family: .text-font (Fira Sans Semibold) - ld. fent */
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 4px 8px 2px 8px;
+}
+
+/* Egy kiválasztható ki-/bemeneti eszköz sora (ld. quicksettings.rs
+   `build_device_row`) - vizuálisan a `.tray-menu-item`/`.qs-row` család
+   tagja: sima háttér, finom hover, lekerekített sarkok. Az aktív (jelenleg
+   kiválasztott) eszköz halvány @primary hátteret és kiemelt feliratot kap
+   - nem csak a kör-glyph jelzi a kijelölést, hogy gyors pillantásra is
+   egyértelmű legyen, melyik eszköz aktív. */
+.qs-device-row {
+  background: none;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  padding: 7px 8px;
+  border-radius: 9px;
+  color: @on_background;
+  /* font-family: .text-font (Fira Sans Semibold) - ld. fent */
+  font-size: 13px;
+  transition:
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+.qs-device-row:hover {
+  background-color: alpha(@primary, 0.1);
+}
+
+.qs-device-row:active {
+  background-color: alpha(@primary, 0.2);
+}
+
+.qs-device-row.active {
+  background-color: alpha(@primary, 0.14);
+}
+
+.qs-device-row.active .qs-device-row-label {
+  color: @primary;
+  font-weight: 700;
+}
+
+.qs-device-row-check {
+  color: alpha(@on_background, 0.35);
+  font-size: 10px;
+  transition: color 120ms ease;
+}
+
+.qs-device-row.active .qs-device-row-check {
+  color: @primary;
+}
+
+/* "Nincs elérhető hangeszköz" üzenet, ha se sink, se source nem található
+   (pl. a `pactl` nincs telepítve, vagy a PipeWire nem fut). */
+.qs-audio-empty {
+  color: alpha(@on_background, 0.6);
+  /* font-family: .text-font (Fira Sans Semibold) - ld. fent */
+  font-size: 12px;
+  padding: 8px;
 }
 
 /* ── Csúszka-kártya (hangerő + fényerő) ───────────────────────────────────
