@@ -9,7 +9,7 @@ window {
 .qs-tile-label,
 .tray-menu-item,
 .notif-badge,
-tooltip > label {
+tooltip label {
   font-family: 'Fira Sans Semibold', 'Fira Sans', sans-serif;
 }
 
@@ -648,15 +648,55 @@ tooltip > label {
 }
 
 /* ── Tooltip ──────────────────────────────────────────────────────────── */
+/* A `tooltip` CSS node maga a tooltip ABLAKÁNAK (surface) a node-ja - erre
+   téve a hátteret/keretet/lekerekítést a lekerekített sarkoknál egy kis
+   háromszög-alakú maradvány villan át, mert a szögletes ablak-felület nem
+   lesz teljesen átlátszóvá a lekerekített doboz sarkain kívül eső részen.
+   Pontosan ugyanaz a hiba-osztály, mint amit a `.tray-menu-popover >
+   contents` minta (ld. fent) elkerül azzal, hogy a hátteret a popover
+   belső `contents` node-jára teszi, nem magára a `popover`-re.
+
+   FONTOS: a GTK4 tooltip-ablak BELSŐ felépítése `tooltip > box > label`
+   (a GtkTooltipWindow egy `box`-ba csomagolja az (elrejtett) ikont és a
+   label-t) - NEM `tooltip > label` közvetlenül. A `>` (közvetlen gyerek)
+   kombinátorral ezért semmi nem illeszkedett a label-re, a háttér/keret/
+   padding/árnyék egyáltalán nem jelent meg, csak a puszta szöveg
+   látszott. A hátteret ezért a valódi közvetlen gyerekre, a `box`-ra
+   tesszük, a szöveg-tulajdonságoknál pedig a `>` elhagyásával (descendant
+   selector) biztosítjuk, hogy a mélységtől függetlenül illeszkedjen a
+   label-re. */
 tooltip {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+/* A `tooltip` (mint GtkWindow) saját `decoration` node-ja - ez egy, a
+   `tooltip`-től és a belső `box`-tól is FÜGGETLEN CSS-node, ami
+   alapból az ablak háttér/árnyék rétegét rajzolja. Ha ezt nem nullázzuk
+   explicit módon, ez a négyzet alakú réteg akkor is látszik (halvány,
+   átlátszó "keret" formájában a lekerekített doboz körül), ha a
+   `tooltip` node-ot magát már transparentre állítottuk. */
+tooltip decoration {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+tooltip > box {
   background-color: @surface_container_high;
   border: 1px solid alpha(@outline, 0.4);
-  border-radius: 8px;
+  /* Szándékosan NINCS lekerekítés: a lekerekített sarkoknál a tooltip-
+     ablak (surface) alfa-kompozitálásának egy renderer/compositor-szintű
+     hibája miatt egy kis szögletes "csonk" villant át (ld. képernyőkép),
+     amit CSS-ből nem sikerült megbízhatóan kiiktatni. Szögletes tooltipnél
+     nincs kerekített sarok, tehát ez a hiba-osztály eleve nem jöhet elő. */
   padding: 4px 8px;
   box-shadow: 0 2px 8px alpha(@shadow, 0.4);
 }
 
-tooltip > label {
+tooltip label {
   color: @on_background;
   /* font-family: .text-font (Fira Sans Semibold) - ld. fent */
   font-size: 12px;
