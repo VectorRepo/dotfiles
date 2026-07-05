@@ -664,4 +664,13 @@ tooltip > label {
 
 .qs-back-btn {
   border-radius: 20%;
+  color: @on_background;
+}
+
+/* A hangerő/fényerő-csúszkák melletti %-felirat (ld. quicksettings.rs
+   percent_label) - eddig nem kapott CSS class-t, ezért a default (fekete)
+   GTK-témaszínt örökölte a @on_background helyett. */
+.qs-slider-value {
+  color: @on_background;
+  font-size: 12px;
 }
