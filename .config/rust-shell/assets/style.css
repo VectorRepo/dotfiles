@@ -568,3 +568,7 @@ tooltip > label {
   /* font-family: .text-font (Fira Sans Semibold) - ld. fent */
   font-size: 12px;
 }
+
+.qs-back-btn {
+  border-radius: 20%;
+}
