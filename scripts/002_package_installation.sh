@@ -9,7 +9,7 @@
 
 # Group 2: Niri Core
 pkgs_niri=(
-    "niri" "xwayland-satellite" "xdg-desktop-portal" "xdg-desktop-portal-gnome" "xdg-desktop-portal-gtk" 
+    "niri" "xwayland-satellite" "xdg-desktop-portal" "xdg-desktop-portal-gnome" 
     "xorg-xhost" "polkit" "polkit-gnome" "xdg-utils" "socat" "inotify-tools" "file"
     "bash" "coreutils" "gawk" "sed" "grep" "desktop-file-utils"
 )
