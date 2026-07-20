@@ -30,6 +30,7 @@ fi
 services=(
     "gnome-keyring-daemon.service"
     "gnome-keyring-daemon.socket"
+    "swaync.service" 
 )
 
 main() {

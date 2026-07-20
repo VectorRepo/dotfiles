@@ -9,19 +9,18 @@ INSTALL_SEQUENCE=(
     "U | 004_enabling_gnome_polkit.sh"
     "U | 005_changing_shell_zsh.sh"
     "U | 006_paru_packages.sh"
-    "S | 008_pam_keyring.sh"
-    "U | 009_fc_cache_fv.sh"
+    # "S | 008_pam_keyring.sh"
+    # "U | 009_fc_cache_fv.sh"
     "U | 012_theme_ctl.sh"        # pending rewrite for Quickshell/Niri
     "U | 013_qtct_config.sh"
     "U | 015_terminal_default.sh"
-    "U | 016_tldr_update.sh"
-    "U | 017_neovim_clean.sh"
+    # "U | 016_tldr_update.sh"
+    # "U | 017_neovim_clean.sh"
     "S | 018_system_services.sh"
-    "S | 019_gtk_root_symlink.sh"
+    # "S | 019_gtk_root_symlink.sh"
     "U | 020_cache_purge.sh"
     "U | 021_cursor_theme_bibata_classic_modern.sh"
-    "U | 023_mpv_setup.sh"
-    "U | 027_niri_reload.sh"
+    # "U | 027_niri_reload.sh"
 )
 
 # ==============================================================================

@@ -5,9 +5,9 @@
 input {
     keyboard {
         xkb {
-            layout "us"
+            layout "us,hu"
             // variant ""
-            // options ""
+            options "grp:alt_shift_toggle"
         }
         numlock
         repeat-delay 250

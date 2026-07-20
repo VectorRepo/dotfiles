@@ -26,7 +26,6 @@ binds {
 
 
     // ==========================================================
-    // 2) QUICKSHELL LAUNCHERS (rofi helyett)
     // ==========================================================
   
     // Widget megnyitók
@@ -55,9 +54,6 @@ binds {
         spawn "qs" "ipc" "call" "shell" "micMute";
     }
 
-    // Lockscreen
-    Mod+X { spawn "bash" "-c" "~/.config/quickshell/scripts/bash/lock"; }
-
     // ==========================================================
     // 3) SCREENSHOT
     // ==========================================================
@@ -76,6 +72,7 @@ binds {
 
 
 
+
     // ==========================================================
     // 4) ABLAKKEZELÉS
     // ==========================================================
@@ -90,7 +87,6 @@ binds {
     Mod+F { fullscreen-window; }
     Mod+D { maximize-column; }
 
-    Mod+Alt+Space { toggle-window-floating; }
     Mod+Alt+C     { center-window; }
     Mod+P         { toggle-window-floating; }
 
@@ -205,7 +201,7 @@ binds {
 
     // Niri konfig újratöltése
     Alt+R hotkey-overlay-title="Reload Niri Config" {
-        spawn "bash" "-c" "niri msg action reload-config && notify-send 'Niri' 'Config reloaded' -u low -t 2000";
+        spawn "bash" "-c" "niri msg action load-config-file && notify-send 'Niri' 'Config reloaded' -u low -t 2000";
     }
 
 

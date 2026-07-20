@@ -33,12 +33,12 @@ trap cleanup EXIT INT TERM
 # CONFIGURATION
 # ------------------------------------------------------------------------------
 readonly PACKAGES=(
-  "otf-atkinson-hyperlegible-next"
   "xdg-terminal-exec"
   "ttf-material-design-icons-extended"
   "skwd-daemon-bin"
   "skwd-wall"
 )
+# "otf-atkinson-hyperlegible-next"
 
 readonly TIMEOUT_SEC=5
 readonly MAX_RETRIES=6

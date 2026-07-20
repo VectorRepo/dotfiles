@@ -6,7 +6,7 @@
 spawn-at-startup "bash" "-c" "systemctl --user import-environment && dbus-update-activation-environment --systemd --all"
 
 // --- 1) XHOST — root GUI app support ---
-spawn-at-startup "xhost" "+si:localuser:root"
+// spawn-at-startup "xhost" "+si:localuser:root"
 
 // --- 2) KEYRING ---
 spawn-at-startup "bash" "-c" "systemctl --user start gnome-keyring-daemon.service"
@@ -19,7 +19,7 @@ spawn-at-startup "bash" "-c" "wl-paste --type text --watch cliphist store"
 spawn-at-startup "bash" "-c" "wl-paste --type image --watch cliphist store"
 
 // --- 6) NOTIFICATION DAEMON
-spawn-at-startup "swaync"
+// spawn-at-startup "swaync"
 
 // --- 7) SHELL + WALLPAPER ---
 spawn-at-startup "skwd-daemon"

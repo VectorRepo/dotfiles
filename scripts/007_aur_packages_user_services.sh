@@ -6,7 +6,7 @@ set -euo pipefail
 
 readonly TARGET_USER_SERVICES=(
   #"swayidle.service"
-  "skwd-daemon.service"
+  # "skwd-daemon.service"
 )
 
 readonly C_RESET=$'\e[0m'

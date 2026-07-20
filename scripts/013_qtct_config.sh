@@ -65,10 +65,11 @@ update_qt_config() {
     # --------------------------------------------------------------------------
     {
         printf "[Appearance]\n"
-        printf "color_scheme_path=\$HOME/.config/matugen/generated/%s\n" "$colors_file"
+        printf "color_scheme_path=\$HOME/.config/%s/%s\n" "$app_name" "$colors_file"
         printf "custom_palette=true\n"
         printf "standard_dialogs=%s\n" "$dialog_val"
         printf "style=Fusion\n"
+        printf "icon_theme=Papirus\n"
     } > "$TEMP_FILE"
 
     # --------------------------------------------------------------------------

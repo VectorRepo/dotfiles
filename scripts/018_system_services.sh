@@ -19,8 +19,6 @@ trap 'exit_code=$?; [[ $exit_code -ne 0 ]] && printf "\n[!] Script failed with c
 # Add or remove system services here.
 readonly TARGET_SERVICES=(
     "udisks2.service"
-    "systemd-timesyncd.service"
-    # "systemd-resolved.service"
 )
 
 # ------------------------------------------------------------------------------

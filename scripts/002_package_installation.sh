@@ -9,29 +9,29 @@
 
 # Group 2: Niri Core
 pkgs_niri=(
-    "niri" "xwayland-satellite" "xdg-desktop-portal" "xdg-desktop-portal-gnome" "xdg-desktop-portal-gtk" 
-    "xorg-xhost" "polkit" "polkit-gnome" "xdg-utils" "socat" "inotify-tools" "file"
-    "bash" "coreutils" "gawk" "sed" "grep" "desktop-file-utils"
+    "niri" "xwayland-satellite" "xdg-desktop-portal-gnome" 
+    "polkit-gnome" "socat" "inotify-tools" 
 )
+# xorg-xhost
 
 # Group 3: GUI, Toolkits & Fonts
 pkgs_appearance=(
-    "qt5-wayland" "qt6-wayland" "gtk3" "gtk4" "nwg-look" "qt5ct" "qt6ct" "qt6-svg"
+    "qt5-wayland" "qt6-wayland" "nwg-look" "qt5ct" "qt6ct" "qt6-svg"
     "qt6-multimedia" "qt6-declarative" "qt6-imageformats" "adw-gtk-theme" "matugen" "ttf-font-awesome"
     "ttf-nerd-fonts-symbols" "ttf-roboto" "papirus-icon-theme" "adwaita-qt6" "adwaita-qt5"
 )
 
 # Group 4: Desktop Experience
 pkgs_desktop=(
-    "quickshell" "swaylock" "swayidle" "brightnessctl" "libdbusmenu-qt5"
-    "libdbusmenu-glib" "python" "wofi" "swaync"
+    "quickshell" "brightnessctl" "libdbusmenu-qt5"
+    "libdbusmenu-glib" "wofi" "swaync"
 )
 
 # Group 6: Filesystem & Archives
 pkgs_filesystem=(
-    "udisks2" "udiskie" "gvfs" "gvfs-mtp" "xdg-user-dirs"
-    "7zip" "cpio" "rsync"  "doublecmd-qt6"
-    "tumbler" "ffmpegthumbnailer" "webp-pixbuf-loader" "poppler-glib"
+    "udisks2" "udiskie" "gvfs" "gvfs-mtp"
+    "doublecmd-qt6"
+    "tumbler" "webp-pixbuf-loader" 
 )
 
 # thunar thunar-volman 
@@ -42,26 +42,26 @@ pkgs_network=(
 
 # Group 8: Terminal & Shell
 pkgs_terminal=(
-    "kitty" "zsh" "zsh-syntax-highlighting" "starship" "fastfetch" "bat" "eza" "fd"
-    "tealdeer" "gum" "man-db" "tree" "fzf" "less" "ripgrep" "expac"
-    "zsh-autosuggestions" "iperf3" "pkgstats" "libqalculate" "yad"
+    "kitty" "zsh" "zsh-syntax-highlighting" "starship" "eza" 
+    "fzf" "expac"
+    "zsh-autosuggestions" "yad"
 )
 
 # Group 9: Development
 pkgs_dev=(
-    "neovim" "npm" "meson" "cmake" "clang" "uv" "rq" "jq" "bc" "ueberzugpp" "ccache"
-    "mold" "shellcheck" "shfmt" "stylua" "prettier" "tree-sitter-cli"
+    "neovim" "npm" "meson" "cmake" "uv" "rq" "ccache"
+    "mold"  "stylua" "prettier" "tree-sitter-cli"
 )
 
 # Group 10: Multimedia
 pkgs_multimedia=(
-    "ffmpeg" "mpv" "zen-browser-bin" "swayimg" "resvg" "imagemagick" "libheif"
+    "mpv" "zen-browser-bin" "swayimg" "resvg" 
     "wl-clipboard" "cliphist" "vesktop" "steam" "cachyos-gaming-meta" "keepassxc"
 )
 
 # Group 11: Sys Admin
 pkgs_sysadmin=(
-    "pacman-contrib" "gnome-keyring"
+    "gnome-keyring"
 )
 
 # --------------------------------------------------------------------------

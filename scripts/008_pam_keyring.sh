@@ -13,7 +13,7 @@ set -euo pipefail
 
 # --- Configuration ---
 readonly TARGET_FILE="/etc/pam.d/login"
-readonly PACKAGES=("gnome-keyring" "libsecret")
+readonly PACKAGES=("libsecret")
 
 # The three lines that need to exist in the file.
 # Each entry: "ANCHOR_PATTERN|LINE_TO_INSERT|POSITION(after/before)"
