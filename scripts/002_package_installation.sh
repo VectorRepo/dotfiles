@@ -9,7 +9,7 @@
 
 # Group 2: Niri Core
 pkgs_niri=(
-    "niri" "xwayland-satellite" "xdg-desktop-portal-gnome" 
+    "niri" "xwayland-satellite" 
     "polkit-gnome" "socat" "inotify-tools" 
 )
 # xorg-xhost

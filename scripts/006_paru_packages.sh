@@ -37,6 +37,7 @@ readonly PACKAGES=(
   "ttf-material-design-icons-extended"
   "skwd-daemon-bin"
   "skwd-wall"
+  "niri-screenshare"
 )
 # "otf-atkinson-hyperlegible-next"
 

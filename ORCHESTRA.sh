@@ -9,6 +9,7 @@ INSTALL_SEQUENCE=(
     "U | 004_enabling_gnome_polkit.sh"
     "U | 005_changing_shell_zsh.sh"
     "U | 006_paru_packages.sh"
+    "U | 007_aur_packages_user_services.sh"
     # "S | 008_pam_keyring.sh"
     # "U | 009_fc_cache_fv.sh"
     "U | 012_theme_ctl.sh"        # pending rewrite for Quickshell/Niri
