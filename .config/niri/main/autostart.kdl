@@ -1,15 +1,15 @@
 // ============================================================
 // ~/.config/niri/main/autostart.kdl
 // ============================================================
-
-// --- 0) SYSTEMD ENVIRONMENT SYNC (KRITIKUS — LEGYEN ELÖL) ---
-spawn-at-startup "bash" "-c" "systemctl --user import-environment && dbus-update-activation-environment --systemd --all"
+//
+// // --- 0) SYSTEMD ENVIRONMENT SYNC (KRITIKUS — LEGYEN ELÖL) ---
+// spawn-at-startup "bash" "-c" "systemctl --user import-environment && dbus-update-activation-environment --systemd --all"
 
 // --- 1) XHOST — root GUI app support ---
 // spawn-at-startup "xhost" "+si:localuser:root"
 
-// --- 1.5) WIREPLUMBER RESTART FIX (STEAM CRASH WORKAROUND) ---
-spawn-at-startup "bash" "-c" "sleep 2 && systemctl --user restart wireplumber.service"
+// // --- 1.5) WIREPLUMBER RESTART FIX (STEAM CRASH WORKAROUND) ---
+// spawn-at-startup "bash" "-c" "sleep 2 && systemctl --user restart wireplumber.service"
 
 // --- 2) KEYRING ---
 spawn-at-startup "bash" "-c" "systemctl --user start gnome-keyring-daemon.service"
@@ -26,7 +26,7 @@ spawn-at-startup "bash" "-c" "wl-paste --type image --watch cliphist store"
 
 // --- 7) SHELL + WALLPAPER ---
 spawn-at-startup "skwd-daemon"
-spawn-at-startup "/home/USERNAME/.local/bin/rust-shell"
+spawn-at-startup "/home/adam/.local/bin/rust-shell"
 
 // -------------------------------------------------------
 // Alternatívák / kommentált opciók
@@ -39,3 +39,4 @@ spawn-at-startup "/home/USERNAME/.local/bin/rust-shell"
 //
 // Network tray (ha kell):
 // spawn-at-startup "nm-applet"
+

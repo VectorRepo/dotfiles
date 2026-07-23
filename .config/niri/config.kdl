@@ -8,6 +8,9 @@
 include "main/monitor.kdl"
 include "main/input.kdl"
 
+// --- Startup ---
+include "main/autostart.kdl"
+
 // --- Environment ---
 include "main/environment.kdl"
 
@@ -22,12 +25,9 @@ include "main/rules.kdl"
 // --- Controls ---
 include "main/binds.kdl"
 
-// --- Startup ---
-include "main/autostart.kdl"
-
-
 debug {
     render-drm-device "/dev/dri/renderD128"
     // ignore-drm-device "/dev/dri/renderD128"
 }
+
 
