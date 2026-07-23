@@ -99,7 +99,7 @@ vim.opt.splitright = true
 -- SAJÁT SPECIFIKUS HOZZÁADÁSOK
 vim.opt.showcmd = true         -- Saját
 vim.opt.fillchars = { eob = " " }  -- Saját
-vim.opt.background = "light"   -- Saját
+vim.opt.background = "dark"    -- Saját
 vim.opt.smarttab = true        -- Saját
 vim.opt.breakindent = true     -- Saját
 vim.opt.formatoptions:append("r")  -- Saját

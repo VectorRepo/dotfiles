@@ -15,7 +15,7 @@ return {
     -- Matugen tokenek → ugyanazok mint a template.lua-ban
     -- A theme.lua SIGUSR1 jelnél újratölti a színeket → itt is frissíteni kell
     local function apply_statusline_hl()
-      local matugen_path = os.getenv("HOME") .. "/.config/matugen/generated/neovim-colors.lua"
+      local matugen_path = os.getenv("HOME") .. "/.config/nvim/neovim-colors.lua"
 
       -- Matugen színek kiolvasása (ugyanaz a logika mint theme.lua-ban)
       local colors = {

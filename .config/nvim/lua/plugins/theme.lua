@@ -8,9 +8,9 @@ return {
       local matugen_path = os.getenv("HOME") .. "/.config/nvim/neovim-colors.lua"
 
       local default_colors = {
-        base00 = "#1e1e2e", base01 = "#181825", base02 = "#313244", base03 = "#45475a",
-        base04 = "#585b70", base05 = "#cdd6f4", base06 = "#f5e0dc", base07 = "#b4befe",
-        base08 = "#f38ba8", base09 = "#fab387", base0A = "#f9e2af", base0B = "#a6e3a1",
+        base00 = "#1f0f0e", base01 = "#2c1b1a", base02 = "#382524", base03 = "#ac8885",
+        base04 = "#ac8885", base05 = "#fbdbd8", base06 = "#fbdbd8", base07 = "#ffb3ad",
+        base08 = "#f38ba8", base09 = "#fab387", base0A = "#f9e2af", base0B = "#ffb3ad",
         base0C = "#94e2d5", base0D = "#89b4fa", base0E = "#cba6f7", base0F = "#f2cdcd",
       }
 
@@ -65,13 +65,13 @@ return {
         end
 
         -- Kijelölés
-        vim.api.nvim_set_hl(0, "BlinkCmpMenuSelection", { bg = primary, fg = "#1e1e2e", bold = true })
-        vim.api.nvim_set_hl(0, "BlinkCmpDocCursorLine", { bg = primary, fg = "#1e1e2e" })
-        vim.api.nvim_set_hl(0, "FzfLuaSel",             { bg = primary, fg = "#1e1e2e", bold = true })
-        vim.api.nvim_set_hl(0, "PmenuSel",              { bg = primary, fg = "#1e1e2e", bold = true })
+        vim.api.nvim_set_hl(0, "BlinkCmpMenuSelection", { bg = primary, fg = "#1f0f0e", bold = true })
+        vim.api.nvim_set_hl(0, "BlinkCmpDocCursorLine", { bg = primary, fg = "#1f0f0e" })
+        vim.api.nvim_set_hl(0, "FzfLuaSel",             { bg = primary, fg = "#1f0f0e", bold = true })
+        vim.api.nvim_set_hl(0, "PmenuSel",              { bg = primary, fg = "#1f0f0e", bold = true })
 
         -- Egyéb
-        vim.api.nvim_set_hl(0, "CursorLine", { bg = "#3b4252" })
+        vim.api.nvim_set_hl(0, "CursorLine", { bg = "#382524" })
         vim.api.nvim_set_hl(0, "Comment",    { italic = true })
         vim.opt.guicursor = "n-v-c:hor20-Cursor,i-ci-ve:ver25-Cursor,r-cr-o:hor20-Cursor"
       end
