@@ -22,6 +22,7 @@ INSTALL_SEQUENCE=(
     "U | 020_cache_purge.sh"
     "U | 021_cursor_theme_bibata_classic_modern.sh"
     # "U | 027_niri_reload.sh"
+    "S | 028_networkmanager_settings.sh"
 )
 
 # ==============================================================================

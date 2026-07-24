@@ -1,0 +1,23 @@
+### Editing /home/adam/.config/systemd/user/niri-screenshare.service.d/override.conf
+### Anything between here and the comment below will become the contents of the drop-in file
+
+[Unit]
+After=graphical-session.target
+Requisite=graphical-session.target
+
+### Edits below this comment will be discarded
+
+
+### /usr/lib/systemd/user/niri-screenshare.service
+# [Unit]
+# Description=Portal service (niri backend)
+# PartOf=graphical-session.target
+# 
+# [Service]
+# Type=dbus
+# BusName=org.freedesktop.impl.portal.desktop.niri
+# ExecStart=/usr/lib/niri-screenshare
+# Restart=on-failure
+# 
+# [Install]
+# WantedBy=graphical-session.target

@@ -1,111 +1,59 @@
-
 #!/usr/bin/env bash
+# Disable NetworkManager Wi-Fi power saving permanently
 
-# This script configures NetworkManager to prevent Wi-Fi disconnections (WPS & Power Saving).
-# --------------------------------------------------------------------------
-# Arch Linux / Niri - Elite System Installer
-# --------------------------------------------------------------------------
+set -euo pipefail
 
-# --- 1. ENGINE & PRIVILEGES ---
+# ==============================================================================
+# CONFIGURATION
+# ==============================================================================
+CONF_FILE="/etc/NetworkManager/conf.d/default-wifi-powersave-on.conf"
 
+GREEN=$'\033[0;32m'
+YELLOW=$'\033[1;33m'
+RED=$'\033[0;31m'
+NC=$'\033[0m'
+
+log() { printf "${GREEN}[018_wifi_powersave_off]${NC} %s\n" "$*" >&2; }
+warn() { printf "${YELLOW}[018_wifi_powersave_off] [WARN]${NC} %s\n" "$*" >&2; }
+err() { printf "${RED}[018_wifi_powersave_off] [ERROR]${NC} %s\n" "$*" >&2; }
+
+# ==============================================================================
+# MAIN LOGIC
+# ==============================================================================
+
+# 1. Root jogosultság ellenőrzése (mivel az Orchestrator 'S' módban hívja meg)
 if [[ $EUID -ne 0 ]]; then
-    printf "Elevating privileges...\n"
-    exec sudo "$0" "$@"
+   err "This script must be run with root privileges (sudo)."
+   exit 1
 fi
 
-set -u
-set -o pipefail
+log "Configuring NetworkManager Wi-Fi power save mode..."
 
-BOLD=$(tput bold 2>/dev/null || echo "")
-GREEN=$(tput setaf 2 2>/dev/null || echo "")
-YELLOW=$(tput setaf 3 2>/dev/null || echo "")
-RED=$(tput setaf 1 2>/dev/null || echo "")
-CYAN=$(tput setaf 6 2>/dev/null || echo "")
-RESET=$(tput sgr0 2>/dev/null || echo "")
-
-NM_CONF="/etc/NetworkManager/NetworkManager.conf"
-NM_CONF_DIR="/etc/NetworkManager/conf.d"
-
-printf "${BOLD}${CYAN}:: Configuring NetworkManager Stablity Fixes...${RESET}\n"
-
-# --- 2. MAIN CONFIGURATION (NetworkManager.conf) ---
-
-if [[ ! -f "$NM_CONF" ]]; then
-    printf " ${YELLOW}[!] %s not found. Creating a blank one.${RESET}\n" "$NM_CONF"
-    mkdir -p "$(dirname "$NM_CONF")"
-    touch "$NM_CONF"
+# 2. Célkönyvtár meglétének ellenőrzése / létrehozása
+CONF_DIR="$(dirname "$CONF_FILE")"
+if [[ ! -d "$CONF_DIR" ]]; then
+    log "Creating directory: $CONF_DIR"
+    mkdir -p "$CONF_DIR"
 fi
 
-# Elmentjük az eredeti fájlt biztonsági mentésként, ha még nem létezik mentés
-if [[ ! -f "${NM_CONF}.bak" ]]; then
-    cp "$NM_CONF" "${NM_CONF}.bak"
-    printf " ${GREEN}[+] Created backup of NetworkManager.conf${RESET}\n"
-fi
-
-# Funkció az INI szekciók és kulcsok intelligens frissítésére/hozzáadására
-update_nm_conf() {
-    local section="$1"
-    local key="$2"
-    local value="$3"
-
-    # Ha a szekció nem létezik, hozzuk létre a fájl végén
-    if ! grep -q "^\[${section}\]" "$NM_CONF"; then
-        echo -e "\n[${section}]" >> "$NM_CONF"
-    fi
-
-    # Ha a kulcs létezik a szekció alatt, frissítjük, ha nem, beszúrjuk alá
-    if sed -n "/^\[${section}\]/,/^\[/p" "$NM_CONF" | grep -q "^${key}="; then
-        # Trükk: Csak az adott szekción belüli kulcsot cseréljük
-        sed -i "/^\[${section}\]/,/^\[/ {s/^${key}=.*/${key}=${value}/}" "$NM_CONF"
-    else
-        # Beszúrjuk a kulcs-értéket közvetlenül a szekció fejléc alá
-        sed -i "/^\[${section}\]/a ${key}=${value}" "$NM_CONF"
-    fi
-}
-
-# Beállítjuk a WPS letiltását és a wpa_supplicant backendet
-printf " ${CYAN}[*] Patching WPS and backend settings...${RESET}\n"
-update_nm_conf "device" "wifi.backend" "wpa_supplicant"
-update_nm_conf "device-wps" "wifi.wps" "no"
-
-# --- 3. SUB-CONFIGURATIONS (conf.d) ---
-
-mkdir -p "$NM_CONF_DIR"
-
-# 99-custom-wifi.conf létrehozása (MAC randomizáció és bgscan finomhangolás)
-printf " ${CYAN}[*] Creating Wi-Fi optimization profiles in conf.d...${RESET}\n"
-
-cat << 'EOF' > "${NM_CONF_DIR}/99-custom-wifi.conf"
-[device]
-wifi.scan-rand-mac-address=no
-
-[connection]
-wifi.cloned-mac-address=preserve
-
-[wifi]
-bgscan=simple:30:-45:300
-EOF
-
-# 00-powersave.conf létrehozása (Wi-Fi energiatakarékosság teljes kikapcsolása)
-cat << 'EOF' > "${NM_CONF_DIR}/00-powersave.conf"
+# 3. Konfigurációs fájl megírása
+# wifi.powersave = 2 jelentése: 2 (Disable Wi-Fi power save)
+log "Writing configuration to $CONF_FILE"
+cat << 'EOF' > "$CONF_FILE"
 [connection]
 wifi.powersave = 2
 EOF
 
-printf " ${GREEN}[+] Stability configuration files written successfully.${RESET}\n"
+# 4. Jogosultságok beállítása (root:root, 644)
+chmod 644 "$CONF_FILE"
+chown root:root "$CONF_FILE"
 
-# --- 4. RELOAD & VERIFY ---
-
-printf " ${CYAN}[*] Restarting NetworkManager to apply changes...${RESET}\n"
-
+# 5. NetworkManager újraindítása (ha fut a service), hogy azonnal érvénybe lépjen
 if systemctl is-active --quiet NetworkManager; then
-    if systemctl restart NetworkManager; then
-        printf "${GREEN} [OK] NetworkManager restarted and changes applied.${RESET}\n"
-    else
-        printf "${RED} [X] Failed to restart NetworkManager!${RESET}\n"
-    fi
+    log "Restarting NetworkManager service to apply changes..."
+    systemctl restart NetworkManager
 else
-    printf "${YELLOW} [!] NetworkManager is not running currently. Configuration will load on next boot.${RESET}\n"
+    warn "NetworkManager service is not active. Changes will take effect upon start/reboot."
 fi
 
-printf "\n${BOLD}${GREEN}:: NETWORK CONFIGISTRATION COMPLETE ::${RESET}\n"
+log "Wi-Fi power save disabled successfully."
