@@ -8,19 +8,19 @@ binds {
     // 1) ALKALMAZÁSOK
     // ==========================================================
 
-    Mod+Return hotkey-overlay-title="Terminal" {
+    Mod+Return hotkey-overlay-title="Terminal" repeat=false {
         spawn "kitty";
     }
-
-    Mod+B hotkey-overlay-title="Browser" {
+    
+    Mod+B hotkey-overlay-title="Browser" repeat=false {
         spawn "zen-browser";
     }
 
-    Mod+E hotkey-overlay-title="File Manager" {
+    Mod+E hotkey-overlay-title="File Manager" repeat=false {
         spawn "doublecmd";
     }
 
-    Mod+R hotkey-overlay-title="Editor" {
+    Mod+R hotkey-overlay-title="Editor" repeat=false {
         spawn "kitty" "--class" "editor" "-e" "nvim";
     }
 
@@ -29,11 +29,11 @@ binds {
     // ==========================================================
   
     // Widget megnyitók
-    Mod+Space {
+    Mod+Space repeat=false {
         spawn "wofi" "--drun";
     }
 
-    Mod+I {
+    Mod+I repeat=false {
         spawn "skwd" "wall" "toggle";
     }
 
@@ -46,11 +46,11 @@ binds {
         spawn "pactl" "set-sink-volume" "@DEFAULT_SINK@" "-5%";
     }
 
-    XF86AudioMute {
+    XF86AudioMute repeat=false {
         spawn "pactl" "set-sink-mute" "@DEFAULT_SINK@" "toggle";
     }
 
-    XF86AudioMicMute {
+    XF86AudioMicMute repeat=false {
         spawn "qs" "ipc" "call" "shell" "micMute";
     }
 
@@ -58,15 +58,15 @@ binds {
     // 3) SCREENSHOT
     // ==========================================================
 
-    Mod+Shift+S hotkey-overlay-title="Screenshot Region" {
+    Mod+Shift+S hotkey-overlay-title="Screenshot Region" repeat=false {
         screenshot;
     }
 
-    Print hotkey-overlay-title="Screenshot Full" {
+    Print hotkey-overlay-title="Screenshot Full" repeat=false {
         screenshot-screen;
     }
 
-    Mod+Print hotkey-overlay-title="Screenshot Window" {
+    Mod+Print hotkey-overlay-title="Screenshot Window" repeat=false {
         screenshot-window;
     }
 
@@ -80,7 +80,7 @@ binds {
     Mod+Q { close-window; }
     Alt+F4 { close-window; }
 
-    Mod+Shift+Q {
+    Mod+Shift+Q repeat=false {
         spawn "bash" "-c" "~/.config/niri/scripts/kill-focused.sh";
     }
 
@@ -186,10 +186,10 @@ binds {
     // 9) MEDIA / HANG / FÉNYERŐ (Quickshell OSD)
     // ==========================================================
 
-    XF86AudioPlay  { spawn "playerctl" "play-pause"; }
-    XF86AudioStop  { spawn "playerctl" "stop"; }
-    XF86AudioNext  { spawn "playerctl" "next"; }
-    XF86AudioPrev  { spawn "playerctl" "previous"; }
+    XF86AudioPlay repeat=false { spawn "playerctl" "play-pause"; }
+    XF86AudioStop repeat=false { spawn "playerctl" "stop"; }
+    XF86AudioNext repeat=false { spawn "playerctl" "next"; }
+    XF86AudioPrev repeat=false { spawn "playerctl" "previous"; }
 
 
     // ==========================================================
@@ -197,10 +197,10 @@ binds {
     // ==========================================================
 
     // Suspend
-    Mod+Shift+Escape { spawn "systemctl" "suspend"; }
+    Mod+Shift+Escape repeat=false { spawn "systemctl" "suspend"; }
 
     // Niri konfig újratöltése
-    Alt+R hotkey-overlay-title="Reload Niri Config" {
+    Alt+R hotkey-overlay-title="Reload Niri Config" repeat=false {
         spawn "bash" "-c" "niri msg action load-config-file && notify-send 'Niri' 'Config reloaded' -u low -t 2000";
     }
 
@@ -211,5 +211,5 @@ binds {
 
     // Overview
     Mod+Tab { toggle-overview; }
-    Mod+N { spawn "bash" "-c" "~/.config/niri/main/Blur/blur_swap.sh"; }
+    Mod+N repeat=false { spawn "bash" "-c" "~/.config/niri/main/Blur/blur_swap.sh"; }
 }
