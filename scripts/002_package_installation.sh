@@ -24,7 +24,7 @@ pkgs_appearance=(
 # Group 4: Desktop Experience
 pkgs_desktop=(
     "quickshell" "brightnessctl" "libdbusmenu-qt5"
-    "libdbusmenu-glib" "wofi" "swaync"
+    "libdbusmenu-glib" "wofi" "swaync" "waybar"
 )
 
 # Group 6: Filesystem & Archives

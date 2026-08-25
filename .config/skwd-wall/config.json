@@ -87,17 +87,12 @@
     {
       "name": "zen",
       "template": "zen.css",
-      "output": "~/.config/zen/4g9y7vqe.Default (release)/chrome/userChrome.css"
+      "output": "~/.config/zen/8c0igcfs.Default (release)/chrome/userChrome.css"
     },
     {
       "name": "vesktop",
       "template": "vesktop.css",
       "output": "~/.config/vesktop/themes/matugen.css"
-    },
-    {
-      "name": "rustshell",
-      "template": "rustshell.css",
-      "output": "~/.config/rust-shell/assets/colors.css"
     },
     {
       "name": "swaync",
@@ -109,6 +104,11 @@
       "name": "wofi",
       "template": "wofi.css",
       "output": "~/.config/wofi/wofi-colors.css"
+    },
+    {
+      "name": "waybar",
+      "template": "waybar-colors.css",
+      "output": "~/.config/waybar/colors.css"
     }
   ],
   "components": {
@@ -116,7 +116,13 @@
       "displayMode": "slices",
       "sliceSpacing": -30,
       "hexScrollStep": 1,
-      "customPresets": {}
+      "customPresets": {},
+      "roundCorners": false,
+      "expandedWidth": 768,
+      "sliceHeight": 432,
+      "sliceWidth": 108,
+      "visibleCount": 14,
+      "skewOffset": 28
     }
   },
   "wallpaperMute": true,

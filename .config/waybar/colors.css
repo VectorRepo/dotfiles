@@ -1,0 +1,20 @@
+/* MATUGEN SABLON - ezt a fájlt NE tedd közvetlenül a waybar mappájába
+   futtatható CSS-ként. Ez egy matugen template, amiből a matugen minden
+   futáskor legenerálja a valódi ~/.config/waybar/colors.css fájlt,
+   a háttérképből (vagy megadott színből) kinyert Material You palettával.
+
+   A sablon helye tetszőleges, pl.:
+     ~/.config/matugen/templates/waybar-colors.css
+
+   A generált kimenet célja:
+     ~/.config/waybar/colors.css
+   (tehát a style.css melletti mappába, hogy a "@import "colors.css";"
+   sor megtalálja.)
+*/
+
+@define-color background #1b1111;
+@define-color foreground #f3ddde;
+@define-color outline #a58a8c;
+@define-color surface #1b1111;
+@define-color primary #ffb2b9;
+@define-color shadow #000000;
