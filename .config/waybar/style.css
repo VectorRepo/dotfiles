@@ -1,7 +1,7 @@
 /* Alapszínek: a matugen generálja ezt a fájlt (colors.css) a mellé rakott
    waybar-colors.css sablon alapján. Ne szerkeszd az importált fájlt kézzel -
    matugen futtatásakor úgyis felülíródik. */
-@import 'colors.css';
+@import "colors.css";
 
 @define-color bg @background;
 @define-color border alpha(@foreground, 0.25);
@@ -10,16 +10,18 @@
 @define-color ia1 @shadow;
 
 * {
+
   border: 0px;
   font-family: 'JetBrainsMono Nerd Font Propo';
   font-size: 12px;
   font-weight: bold;
   min-height: 0;
-}
+  }
+
 
 /* --- Waybar ---*/
 window#waybar {
-  background-color: transparent;
+ background-color: transparent;
 }
 
 #waybar > box {
@@ -28,7 +30,7 @@ window#waybar {
   background-color: @bg;
   box-shadow: 1px 1px 2px 0px #101010;
   transition-property: background-color;
-  transition-duration: 0.5s;
+  transition-duration: .5s;
   min-height: 0px;
 }
 
@@ -45,11 +47,11 @@ window#waybar.empty #window {
 #left1 {
   color: @fg2;
   border-radius: 2px;
-  border: 1px solid @border;
+  border: 1px dashed @border;
   padding: 0 8px;
   margin: 2px 0px;
   margin-left: 4px;
-}
+ }
 
 #custom-launcher {
   padding: 0 4px;
@@ -59,17 +61,33 @@ window#waybar.empty #window {
   color: @fg;
 }
 
+#custom-swaync {
+  padding: 0 4px;
+}
+
+#custom-swaync:hover {
+  color: @fg;
+}
+
+#custom-power {
+  padding: 0 4px;
+}
+
+#custom-power:hover {
+  color: #f53c3c;
+}
+
 .modules-center {
   color: @fg2;
   border-radius: 2px;
-  border: 1px solid @border;
+  border: 1px dashed @border;
   padding: 0px;
   margin: 2px 0px;
   margin-left: 4px;
 }
 #right {
   color: @fg2;
-  border: 1px solid @border;
+  border: 1px dashed @border;
   border-radius: 2px;
   padding: 0px;
   margin: 2px 4px;
@@ -78,16 +96,33 @@ window#waybar.empty #window {
 
 #right1 {
   color: @fg2;
-  border: 1px solid @border;
+  border: 1px dashed @border;
   border-radius: 2px;
   padding: 0 6px;
   margin: 2px 0px;
 }
 
+#left3 {
+  color: @fg2;
+  border-radius: 2px;
+  border: 1px dashed @border;
+  padding: 0 8px;
+  margin: 2px 0px;
+}
+
+#right2 {
+  color: @fg2;
+  border-radius: 2px;
+  border: 1px dashed @border;
+  padding: 0 8px;
+  margin: 2px 4px;
+  margin-right: 4px;
+}
+
 /* --- Workspaces --- */
 #workspaces {
-  margin: 2px;
-  padding: 0px;
+margin: 2px;
+padding: 0px;
 }
 
 #workspaces button {
@@ -115,24 +150,24 @@ window#waybar.empty #window {
 }
 
 #workspaces button:hover {
-  background-color: transparent;
-  color: @fg;
-  opacity: 1;
+    background-color: transparent;
+    color: @fg;
+    opacity: 1;
 }
+
 
 /* --- General Modules --- */
 
 #cava,
-#mpris,
 #tray,
 #memory,
 #cpu,
-#battery,
 #pulseaudio {
   min-width: 14px;
   padding-left: 3px;
   padding-right: 3px;
   margin: 0 2px 0 2px;
+  
 }
 
 /* Fix szélesség, hogy a rövid ("Wed 26 | 00:02") és a teljes
@@ -150,71 +185,44 @@ window#waybar.empty #window {
 #clock:hover,
 #cpu:hover,
 #memory:hover,
-#mpris:hover,
-#battery:hover,
 #pulseaudio:hover {
   color: @fg;
   background-color: transparent;
 }
 
-/* Ugyanaz a háttér/border/radius/shadow, mint a lenti "menu" szabálynál,
-   hogy a naptár tooltip és a tray jobbklikk menü egyformán nézzen ki. */
+
+/* A tooltip most szögletes (nincs border-radius) és nincs box-shadow-ja.
+   A keretet csak a "decoration" node kapja meg (lásd lentebb) - ha a
+   "tooltip" node is kapna border-t, két, egymásra csúszó keret látszana. */
 tooltip {
   background-color: @bg;
   color: @fg;
-  border: 1px solid @border;
-  border-radius: 4px;
   padding: 4px;
-  box-shadow: 1px 1px 4px 0px #101010;
   font-size: 10px;
 }
 tooltip label {
-  color: @fg;
-  font-weight: normal;
+    color: @fg;
+    font-weight: normal;
+}
+
+/* A tooltip ablaknak van egy külön "decoration" rétege a tartalom
+   mögött, ami a tényleges hátteret/keretet rajzolja. Ha ezt nem
+   célzod meg külön, néhány GTK verzión a keret csak részlegesen
+   (pl. csak a sarkoknál) jelenik meg, amikor a tooltip mérete
+   megváltozik (pl. rövid vs. hosszú naptár nézet között). Ezért itt
+   is beállítjuk ugyanazt a hátteret/keretet, hogy konzisztens legyen
+   minden méretnél. */
+tooltip decoration {
+  background-color: @bg;
+  border: 1px solid @border;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 /* Specific Module */
 
 .hidden {
   opacity: 0;
-}
-
-#mpris {
-  color: @fg2;
-  animation: repeat;
-  animation-name: blink;
-  animation-duration: 3s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-}
-
-@keyframes blink {
-  to {
-    color: #4a4a4a;
-  }
-}
-
-#battery.warning {
-  color: #c95d0f;
-  background-color: @bg;
-}
-
-@keyframes blink2 {
-  to {
-    background-color: @bg;
-    color: #f53c3c;
-  }
-}
-
-#battery.critical:not(.charging) {
-  background-color: @bg;
-  color: #e6d8ba;
-  animation-name: blink2;
-  animation-duration: 0.5s;
-  animation-timing-function: steps(12);
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
 }
 
 /* --- Tray ikonok (drawer nélkül, simán megjelenítve) --- */
@@ -243,7 +251,7 @@ menu {
   background-color: @bg;
   color: @fg;
   border: 1px solid @border;
-  /* border-radius: 4px; */
+  border-radius: 4px;
   padding: 4px;
   box-shadow: 1px 1px 4px 0px #101010;
 }
