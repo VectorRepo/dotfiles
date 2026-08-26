@@ -211,3 +211,15 @@ if [[ -f "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting
 fi
 
 unset _starship_cache _starship_bin _fzf_cache _fzf_bin
+
+
+# -----------------------------------------------------------------------------
+# [7] STARTUP SCREEN
+# -----------------------------------------------------------------------------
+
+# Csak az első interaktív shell induláskor fusson le (ne minden subshellnél,
+# pl. ha tmux/vim-ből nyitsz új panelt vagy neked van egy nested shell-ed)
+if [[ -z "$FASTFETCH_SHOWN" && -z "$TMUX" ]]; then
+    export FASTFETCH_SHOWN=1
+    ~/.config/fastfetch/random-fastfetch.sh
+fi
