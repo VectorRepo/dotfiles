@@ -33,6 +33,10 @@ binds {
         spawn "wofi" "--drun";
     }
 
+    Mod+Shift+X repeat=false {
+        spawn "bash" "-c" "~/.config/wofi/scripts/powermenu.sh";
+    }
+
     Mod+I repeat=false {
         spawn "skwd" "wall" "toggle";
     }

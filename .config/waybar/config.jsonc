@@ -96,12 +96,12 @@
     "modules": ["custom/power"]
   },
 
-  // Power gomb - egyelőre nincs on-click akció, mert a wofi power menu
-  // szkript még nincs kész. Ha elkészült, ide kerül majd pl.:
-  // "on-click": "wofi-power-menu" (vagy a saját szkripted elérési útja).
+  // Power gomb - megnyitja a Wofi alapú power menüt (zárolás,
+  // kijelentkezés, felfüggesztés, újraindítás, leállítás).
   "custom/power": {
     "format": "⏻",
-    "tooltip": false
+    "tooltip": false,
+    "on-click": "bash $HOME/.config/wofi/scripts/powermenu.sh"
   },
 
   // niri saját waybar modulja (>= waybar verzió, ami tartalmazza a niri
@@ -135,14 +135,11 @@
 
   "cpu": {
     "interval": 5,
-    "format": "cpu {usage}%",
-    // Cseréld a saját terminál emulátorodra és TUI-dra, pl.: "foot -e btop"
-    "on-click": "your-terminal -e btop"
+    "format": "cpu {usage}%"
   },
   "memory": {
     "interval": 5,
-    "format": "mem {used:0.1f}G",
-    "on-click": "your-terminal -e btop"
+    "format": "mem {used:0.1f}G"
   },
   "clock": {
     "locale": "en_US.UTF-8",

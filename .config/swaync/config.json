@@ -37,20 +37,16 @@
   "notification-body-image-height": 200,
   "notification-body-image-width": 200,
 
-  "widgets": [
-    "title",
-    "dnd",
-    "notifications"
-  ],
+  "widgets": ["title", "dnd", "notifications"],
 
   "widget-config": {
     "title": {
-      "text": "Értesítések",
+      "text": "Notifications",
       "clear-all-button": true,
-      "button-text": "Összes törlése"
+      "button-text": "Delete All"
     },
     "dnd": {
-      "text": "Ne zavarj"
+      "text": "Do Not Disturb"
     },
     "label": {
       "max-lines": 3,

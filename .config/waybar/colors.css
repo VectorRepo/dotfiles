@@ -12,9 +12,9 @@
    sor megtalálja.)
 */
 
-@define-color background #17130a;
-@define-color foreground #ebe1d1;
-@define-color outline #9a9079;
-@define-color surface #17130a;
-@define-color primary #ffd556;
+@define-color background #210e0b;
+@define-color foreground #ffdad4;
+@define-color outline #b18780;
+@define-color surface #210e0b;
+@define-color primary #ffb4a8;
 @define-color shadow #000000;
