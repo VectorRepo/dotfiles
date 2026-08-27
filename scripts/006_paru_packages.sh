@@ -58,8 +58,6 @@ if ! command -v shelly &>/dev/null; then
   exit 1
 fi
 
-readonly AUR_HELPER="shelly aur"
-
 # ------------------------------------------------------------------------------
 # MAIN LOGIC
 # ------------------------------------------------------------------------------
@@ -75,7 +73,7 @@ main() {
 
   local update_success=false
   for ((i=1; i<=MAX_RETRIES; i++)); do
-    if shelly update; then
+    if shelly upgrade standard --no-confirm; then
       update_success=true
       break
     else
@@ -115,7 +113,7 @@ main() {
   # --------------------------------------------------------------------------
   log_task "Attempting Batch Installation with Shelly..."
 
-  if shelly aur install "${to_install[@]}"; then
+  if shelly install aur "${to_install[@]}" --no-confirm; then
     log_success "Batch installation successful."
     return 0
   else
@@ -134,7 +132,7 @@ main() {
     local retry_count=0
 
     while true; do
-      if shelly aur install "$pkg"; then
+      if shelly install aur "$pkg" --no-confirm; then
         log_success "Installed $pkg."
         ((success_count++))
         break
@@ -165,7 +163,7 @@ main() {
           m)
             printf "\n"
             log_info "Manual mode for $pkg..."
-            if shelly aur install "$pkg"; then
+            if shelly install aur "$pkg"; then
               log_success "Manual install successful."
               ((success_count++))
               break
