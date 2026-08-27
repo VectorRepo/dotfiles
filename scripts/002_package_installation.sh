@@ -16,7 +16,7 @@ pkgs_niri=(
 
 # Group 3: GUI, Toolkits & Fonts
 pkgs_appearance=(
-    "qt5-wayland" "qt6-wayland" "nwg-look" "qt5ct" "qt6ct" "qt6-svg"
+    "qt5-wayland" "qt6-wayland" "nwg-look" "qt5ct" "qt6ct" "qt6-svg" "fastfetch"
     "qt6-multimedia" "qt6-declarative" "qt6-imageformats" "adw-gtk-theme" "matugen" "ttf-font-awesome"
     "ttf-nerd-fonts-symbols" "ttf-roboto" "papirus-icon-theme" "adwaita-qt6" "adwaita-qt5"
 )

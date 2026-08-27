@@ -33,7 +33,7 @@ trap cleanup EXIT INT TERM
 # CONFIGURATION
 # ------------------------------------------------------------------------------
 readonly PACKAGES=(
-  "xdg-terminal-exec"
+  # "xdg-terminal-exec"
   "ttf-material-design-icons-extended"
   "skwd-daemon-bin"
   "skwd-wall"
