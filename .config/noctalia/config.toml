@@ -1,0 +1,13 @@
+[shell]
+corner_radius_scale = 0.0
+polkit_agent = true
+popup_shadows = false
+
+    [shell.panel]
+    shadow = false
+    transparency_mode = "soft"
+
+[wallpaper]
+enabled = false
+custom_palette = "skwdwall"
+source = "custom"

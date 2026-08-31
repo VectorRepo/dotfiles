@@ -15,7 +15,7 @@
 spawn-at-startup "bash" "-c" "systemctl --user start gnome-keyring-daemon.service"
 
 // --- 3) POLKIT AGENT ---
-spawn-at-startup "bash" "-c" "systemctl --user start polkit-gnome.service"
+// spawn-at-startup "bash" "-c" "systemctl --user start polkit-gnome.service"
 
 // --- 5) VÁGÓLAP ---
 spawn-at-startup "bash" "-c" "wl-paste --type text --watch cliphist store"
@@ -26,7 +26,7 @@ spawn-at-startup "bash" "-c" "wl-paste --type image --watch cliphist store"
 
 // --- 7) SHELL + WALLPAPER ---
 spawn-at-startup "skwd-daemon"
-spawn-at-startup "waybar"
+spawn-at-startup "noctalia"
 
 // -------------------------------------------------------
 // Alternatívák / kommentált opciók

@@ -6,7 +6,7 @@
 INSTALL_SEQUENCE=(
     "S | 002_package_installation.sh"
     "U | 003_enabling_user_services.sh"
-    "U | 004_enabling_gnome_polkit.sh"
+    # "U | 004_enabling_gnome_polkit.sh"
     "U | 005_changing_shell_zsh.sh"
     "U | 006_paru_packages.sh"
     "U | 007_aur_packages_user_services.sh"

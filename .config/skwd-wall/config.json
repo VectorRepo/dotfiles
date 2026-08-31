@@ -95,20 +95,10 @@
       "output": "~/.config/vesktop/themes/matugen.css"
     },
     {
-      "name": "swaync",
-      "template": "sway-colors.css",
-      "output": "~/.config/swaync/colors.css",
-      "reload": "swaync-client -R && swaync-client -rs"
-    },
-    {
-      "name": "wofi",
-      "template": "wofi.css",
-      "output": "~/.config/wofi/wofi-colors.css"
-    },
-    {
-      "name": "waybar",
-      "template": "waybar-colors.css",
-      "output": "~/.config/waybar/colors.css"
+      "name": "noctalia",
+      "template": "noctalia-palette.json",
+      "output": "~/.config/noctalia/palettes/skwdwall.json",
+      "reload": "noctalia msg color-scheme-set custom skwdwall"
     }
   ],
   "components": {

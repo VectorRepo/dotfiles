@@ -9,10 +9,10 @@
 
 # Group 2: Niri Core
 pkgs_niri=(
-    "niri" "xwayland-satellite" "rtkit" 
-    "polkit-gnome" "socat" "inotify-tools" 
+    "niri" "noctalia" "xwayland-satellite" "rtkit" 
+    "socat" "inotify-tools" 
 )
-# xorg-xhost
+# xorg-xhost polkit-gnome
 
 # Group 3: GUI, Toolkits & Fonts
 pkgs_appearance=(
@@ -24,7 +24,7 @@ pkgs_appearance=(
 # Group 4: Desktop Experience
 pkgs_desktop=(
     "quickshell" "brightnessctl" "libdbusmenu-qt5"
-    "libdbusmenu-glib" "wofi" "swaync" "waybar"
+    "libdbusmenu-glib"
 )
 
 # Group 6: Filesystem & Archives
@@ -57,7 +57,7 @@ pkgs_dev=(
 pkgs_multimedia=(
     "mpv" "zen-browser-bin" "swayimg" "resvg" 
     "wl-clipboard" "cliphist" "vesktop" "steam" "cachyos-gaming-meta" "keepassxc"
-)
+
 
 # Group 11: Sys Admin
 pkgs_sysadmin=(

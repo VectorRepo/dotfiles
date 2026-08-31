@@ -30,11 +30,11 @@ binds {
   
     // Widget megnyitók
     Mod+Space repeat=false {
-        spawn "wofi" "--drun";
+        spawn "noctalia" "msg" "panel-toggle" "launcher";
     }
 
     Mod+Shift+X repeat=false {
-        spawn "bash" "-c" "~/.config/wofi/scripts/powermenu.sh";
+        spawn "noctalia" "msg" "panel-toggle" "session";
     }
 
     Mod+I repeat=false {
@@ -52,10 +52,6 @@ binds {
 
     XF86AudioMute repeat=false {
         spawn "pactl" "set-sink-mute" "@DEFAULT_SINK@" "toggle";
-    }
-
-    XF86AudioMicMute repeat=false {
-        spawn "qs" "ipc" "call" "shell" "micMute";
     }
 
     // ==========================================================
