@@ -47,11 +47,25 @@
 @define-color theme_unfocused_selected_bg_color @accent_bg_color;
 @define-color theme_unfocused_selected_fg_color @accent_fg_color;
 
+/* Classic (non-libadwaita) GTK3 Adwaita names - this file is fed to both
+   gtk-3.0/gtk.css and gtk-4.0/gtk.css, but plain GTK3 apps don't read the
+   window_bg_color/accent_bg_color style names above, they read these */
+@define-color theme_bg_color @window_bg_color;
+@define-color theme_fg_color @window_fg_color;
+@define-color theme_base_color @view_bg_color;
+@define-color theme_text_color @view_fg_color;
+@define-color theme_selected_bg_color @accent_bg_color;
+@define-color theme_selected_fg_color @accent_fg_color;
+/* Matches what noctalia's own "outline" field actually resolves to
+   (outline_variant, confirmed from its source - see mapGeneratedPaletteMode) */
+@define-color borders {{colors.outline_variant.default.hex}};
+@define-color unfocused_borders {{colors.outline_variant.default.hex}};
+
 /* Minden ablak és dekoráció lekerekítésének kikapcsolása */
 window,
-window decoration,
 .background,
-.headerbar {
+.headerbar,
+.titlebar {
     border-radius: 0;
 }
 
@@ -61,7 +75,18 @@ messagedialog {
 }
 
 /* Ha a belső elemek is kerekek lennének */
-button {
+button,
+entry,
+switch,
+switch slider,
+scale,
+scale trough,
+scale slider,
+spinbutton,
+checkbutton check,
+radiobutton radio,
+tooltip,
+.osd {
     border-radius: 0;
 }
 
@@ -76,6 +101,5 @@ button:focus,
 button:focus-visible,
 button:checked:focus,
 button:checked:focus-visible {
-    border-radius: 0;
     outline-offset: 0;
 }
