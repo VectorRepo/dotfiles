@@ -10,7 +10,10 @@ popup_shadows = false
 [lockscreen]
 blurred_desktop = true
 
+[theme]
+custom_palette = "skwdwall"
+mode = "dark"
+source = "custom"
+
 [wallpaper]
 enabled = false
-custom_palette = "skwdwall"
-source = "custom"

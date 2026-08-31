@@ -10,7 +10,7 @@ INSTALL_SEQUENCE=(
     "U | 005_changing_shell_zsh.sh"
     "U | 006_paru_packages.sh"
     "U | 007_aur_packages_user_services.sh"
-    # "S | 008_pam_keyring.sh"
+    "S | 008_pam_keyring.sh"
     # "U | 009_fc_cache_fv.sh"
     "U | 012_theme_ctl.sh"        # pending rewrite for Quickshell/Niri
     "U | 013_qtct_config.sh"
