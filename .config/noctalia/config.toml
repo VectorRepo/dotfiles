@@ -7,6 +7,9 @@ popup_shadows = false
     shadow = false
     transparency_mode = "soft"
 
+[lockscreen]
+blurred_desktop = true
+
 [wallpaper]
 enabled = false
 custom_palette = "skwdwall"
