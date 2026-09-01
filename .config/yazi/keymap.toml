@@ -1,0 +1,16 @@
+#:schema https://yazi-rs.github.io/schemas/keymap.json
+
+# ============================================================
+# [mgr] - extra keybindings added on top of the built-in defaults
+# (prepend_keymap merges with the defaults, doesn't replace them)
+# ============================================================
+[mgr]
+prepend_keymap = [
+	# Directory history - built-in zoxide.lua plugin, needs the
+	# `zoxide` binary installed on the system, nothing else to install
+	{ on = "z", run = "plugin zoxide", desc = "Jump to a directory using zoxide" },
+
+	# Disk mount / unmount / eject - external plugin, install with:
+	#   ya pkg add yazi-rs/plugins:mount
+	{ on = "M", run = "plugin mount", desc = "Mount manager" },
+]

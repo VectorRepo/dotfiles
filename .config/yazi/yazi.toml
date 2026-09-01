@@ -1,0 +1,63 @@
+#:schema https://yazi-rs.github.io/schemas/yazi.json
+
+# ============================================================
+# [mgr] - File list, sorting, layout
+# ============================================================
+[mgr]
+ratio          = [1, 4, 3]
+
+sort_by        = "natural"
+sort_sensitive = false
+sort_reverse   = false
+sort_dir_first = true
+sort_translit  = false
+
+linemode       = "size"
+show_hidden    = false
+show_symlink   = true
+scrolloff      = 5
+
+mouse_events   = ["click", "scroll", "drag"]
+
+
+# ============================================================
+# [preview] - Preview pane (code, images, video)
+# ============================================================
+[preview]
+wrap       = "no"
+tab_size   = 2
+max_width  = 1200
+max_height = 1800
+
+image_delay  = 30
+image_filter = "triangle"
+image_quality = 75
+
+
+# ============================================================
+# [opener] - What runs when you open a file
+# ============================================================
+[opener]
+edit = [
+	{ run = "nvim %s", block = true, desc = "Edit with nvim" },
+]
+
+open = [
+	{ run = "xdg-open %s1", desc = "Open", orphan = true },
+]
+
+reveal = [
+	{ run = "xdg-open %d", desc = "Reveal in file manager", orphan = true },
+]
+
+
+# ============================================================
+# [plugin] - Preloaders / fetchers for plugins that need one
+# (per-plugin keybindings live in keymap.toml, not here)
+# ============================================================
+[plugin]
+prepend_fetchers = [
+	# Uncomment if you install git.yazi (git status as linemode)
+	# { id = "git", name = "*", run = "git", if = "git" },
+	# { id = "git", name = "*/", run = "git", if = "git" },
+]

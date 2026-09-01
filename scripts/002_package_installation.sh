@@ -30,7 +30,6 @@ pkgs_desktop=(
 # Group 6: Filesystem & Archives
 pkgs_filesystem=(
     "udisks2" "udiskie" "gvfs" "gvfs-mtp"
-    "doublecmd-qt6"
     "tumbler" "webp-pixbuf-loader" 
 )
 
@@ -43,7 +42,7 @@ pkgs_network=(
 # Group 8: Terminal & Shell
 pkgs_terminal=(
     "kitty" "zsh" "zsh-syntax-highlighting" "starship" "eza" 
-    "fzf" "expac"
+    "fzf" "expac" "yazi" "zoxide"
     "zsh-autosuggestions" "yad"
 )
 

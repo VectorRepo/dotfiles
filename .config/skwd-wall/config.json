@@ -38,7 +38,8 @@
   "matugen": {
     "schemeType": "scheme-content",
     "mode": "dark",
-    "colorIndex": 0
+    "colorIndex": 0,
+    "contrast": 0
   },
   "integrations": [
     {
@@ -87,7 +88,7 @@
     {
       "name": "zen",
       "template": "zen.css",
-      "output": "~/.config/zen/8c0igcfs.Default (release)/chrome/userChrome.css"
+      "output": "~/.config/zen/ti1xeko6.Default (release)/chrome/userChrome.css"
     },
     {
       "name": "vesktop",
@@ -97,8 +98,13 @@
     {
       "name": "noctalia",
       "template": "noctalia-palette.json",
-      "output": "~/.config/noctalia/palettes/skwdwall.json",
-      "reload": "noctalia msg color-scheme-set custom skwdwall"
+      "output": "~/.config/noctalia/palettes/wallpaper-mc.json",
+      "reload": "noctalia msg color-scheme-set custom wallpaper-mc"
+    },
+    {
+      "name": "yazi",
+      "template": "yazi.toml",
+      "output": "~/.config/yazi/theme.toml"
     }
   ],
   "components": {
