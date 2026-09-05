@@ -1,0 +1,49 @@
+[config]
+reload_apps = false
+
+[templates.kitty]
+input_path = "/home/adam/.config/skwd-wall-v2/matugen/templates/kitty.conf"
+output_path = "/home/adam/.config/kitty/kitty-colors.conf"
+post_hook = "pkill -SIGUSR1 kitty || true"
+
+[templates.niri]
+input_path = "/home/adam/.config/skwd-wall-v2/matugen/templates/niri-colors.kdl"
+output_path = "/home/adam/.config/niri/main/niri-colors.kdl"
+
+[templates.gtk3]
+input_path = "/home/adam/.config/skwd-wall-v2/matugen/templates/gtk-colors.css"
+output_path = "/home/adam/.config/gtk-3.0/gtk.css"
+
+[templates.gtk4]
+input_path = "/home/adam/.config/skwd-wall-v2/matugen/templates/gtk-colors.css"
+output_path = "/home/adam/.config/gtk-4.0/gtk.css"
+
+[templates.qt5ct]
+input_path = "/home/adam/.config/skwd-wall-v2/matugen/templates/qtct-colors.conf"
+output_path = "/home/adam/.config/qt5ct/qt5ct-colors.conf"
+
+[templates.qt6ct]
+input_path = "/home/adam/.config/skwd-wall-v2/matugen/templates/qtct-colors.conf"
+output_path = "/home/adam/.config/qt6ct/qt6ct-colors.conf"
+
+[templates.neovim]
+input_path = "/home/adam/.config/skwd-wall-v2/matugen/templates/neovim-template.lua"
+output_path = "/home/adam/.config/nvim/neovim-colors.lua"
+post_hook = "pkill -SIGUSR1 nvim || true"
+
+[templates.zen]
+input_path = "/home/adam/.config/skwd-wall-v2/matugen/templates/zen.css"
+output_path = "/home/adam/.config/zen/ti1xeko6.Default (release)/chrome/userChrome.css"
+
+[templates.vesktop]
+input_path = "/home/adam/.config/skwd-wall-v2/matugen/templates/vesktop.css"
+output_path = "/home/adam/.config/vesktop/themes/matugen.css"
+
+[templates.noctalia]
+input_path = "/home/adam/.config/skwd-wall-v2/matugen/templates/noctalia-palette.json"
+output_path = "/home/adam/.config/noctalia/palettes/skwdwall.json"
+post_hook = "noctalia msg color-scheme-set custom skwdwall"
+
+[templates.yazi]
+input_path = "/home/adam/.config/skwd-wall-v2/matugen/templates/yazi.toml"
+output_path = "/home/adam/.config/yazi/theme.toml"

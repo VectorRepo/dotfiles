@@ -1,0 +1,16 @@
+// ============================================================
+// ~/.config/matugen/templates/niri-colors.kdl
+// ============================================================
+
+layout {
+    focus-ring {
+        width 2
+        active-color   "{{colors.primary.default.hex}}"
+        inactive-color "{{colors.outline.default.hex}}"
+    }
+
+    border {
+        off
+    }
+}
+

@@ -36,7 +36,7 @@ readonly PACKAGES=(
   # "xdg-terminal-exec"
   "ttf-material-design-icons-extended"
   "skwd-wall-v2-bin"
-  "skwd-skwd-deck-bin"
+  "skwd-deck-bin"
   "skwd-paper-bin"
   "skwd-lens-bin"
   "niri-screenshare"

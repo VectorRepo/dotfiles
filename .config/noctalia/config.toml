@@ -10,6 +10,10 @@ popup_shadows = false
 [lockscreen]
 blurred_desktop = true
 
+[osd]
+background_opacity = 0.79999998211860657
+position = "bottom_center"
+
 [theme]
 custom_palette = "skwdwall"
 mode = "dark"

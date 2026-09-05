@@ -1,0 +1,24 @@
+{
+  "components": {
+    "wallpaperSelector": {
+      "displayMode": "sandy",
+      "enabled": true
+    }
+  },
+  "defaultMatugenConfig": "~/.config/matugen/config.toml",
+  "filterBar": {
+    "visualStyle": "match"
+  },
+  "integrations": [],
+  "matugen": {
+    "colorIndex": 0,
+    "mode": "dark",
+    "schemeType": "scheme-content"
+  },
+  "theme": {
+    "authority": "skwd",
+    "engine": "matugen",
+    "scheme": "content",
+    "style": "natural"
+  }
+}

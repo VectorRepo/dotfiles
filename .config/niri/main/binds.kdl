@@ -43,15 +43,15 @@ binds {
 
     // Hangerő
     XF86AudioRaiseVolume {
-        spawn "pactl" "set-sink-volume" "@DEFAULT_SINK@" "+5%";
+        spawn "noctalia" "msg" "volume-up";
     }
 
     XF86AudioLowerVolume {
-        spawn "pactl" "set-sink-volume" "@DEFAULT_SINK@" "-5%";
+        spawn "noctalia" "msg" "volume-down";
     }
 
     XF86AudioMute repeat=false {
-        spawn "pactl" "set-sink-mute" "@DEFAULT_SINK@" "toggle";
+        spawn "noctalia" "msg" "volume-mute";
     }
 
     // ==========================================================
