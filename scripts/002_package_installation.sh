@@ -23,7 +23,7 @@ pkgs_appearance=(
 
 # Group 4: Desktop Experience
 pkgs_desktop=(
-    "quickshell" "brightnessctl" "libdbusmenu-qt5"
+    "brightnessctl" "libdbusmenu-qt5"
     "libdbusmenu-glib"
 )
 

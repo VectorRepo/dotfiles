@@ -5,8 +5,7 @@
 set -euo pipefail
 
 readonly TARGET_USER_SERVICES=(
-  #"swayidle.service"
-  # "skwd-daemon.service"
+  "skwd-walld.service"
   "niri-screenshare.service"
 )
 

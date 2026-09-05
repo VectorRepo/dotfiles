@@ -38,7 +38,7 @@ binds {
     }
 
     Mod+I repeat=false {
-        spawn "skwd" "wall" "toggle";
+        spawn "skwd-wall-v2";
     }
 
     // Hangerő

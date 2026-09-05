@@ -35,8 +35,10 @@ trap cleanup EXIT INT TERM
 readonly PACKAGES=(
   # "xdg-terminal-exec"
   "ttf-material-design-icons-extended"
-  "skwd-daemon-bin"
-  "skwd-wall"
+  "skwd-wall-v2-bin"
+  "skwd-skwd-deck-bin"
+  "skwd-paper-bin"
+  "skwd-lens-bin"
   "niri-screenshare"
 )
 # "otf-atkinson-hyperlegible-next"
