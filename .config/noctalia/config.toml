@@ -1,5 +1,4 @@
 [shell]
-corner_radius_scale = 0.0
 polkit_agent = true
 popup_shadows = false
 
@@ -11,7 +10,6 @@ popup_shadows = false
 blurred_desktop = true
 
 [osd]
-background_opacity = 0.79999998211860657
 position = "bottom_center"
 
 [theme]

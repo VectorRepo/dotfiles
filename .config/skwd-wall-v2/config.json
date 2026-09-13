@@ -5,20 +5,112 @@
       "enabled": true
     }
   },
-  "defaultMatugenConfig": "~/.config/skwd-wall-v2/matugen/config.toml",
+  "defaultMatugenConfig": "",
+  "externalMatugenCommand": "",
   "filterBar": {
     "visualStyle": "match"
   },
-  "integrations": [],
+  "integrations": [
+    {
+      "livePreview": false,
+      "name": "kitty",
+      "output": "~/.config/kitty/kitty-colors.conf",
+      "reload": "kill -SIGUSR1 $(pgrep kitty)",
+      "template": "kitty.conf"
+    },
+    {
+      "livePreview": false,
+      "name": "noctalia",
+      "output": "~/.config/noctalia/palettes/skwdwall.json",
+      "reload": "noctalia msg color-scheme-set custom skwdwall",
+      "template": "noctalia-palette.json"
+    },
+    {
+      "livePreview": false,
+      "name": "niri",
+      "output": "~/.config/niri/main/niri-colors.kdl",
+      "template": "niri-colors.kdl"
+    },
+    {
+      "livePreview": false,
+      "name": "gtk3",
+      "output": "~/.config/gtk-3.0/gtk.css",
+      "template": "gtk-colors.css"
+    },
+    {
+      "livePreview": false,
+      "name": "gtk4",
+      "output": "~/.config/gtk-4.0/gtk.css",
+      "template": "gtk-colors.css"
+    },
+    {
+      "livePreview": false,
+      "name": "qt5ct",
+      "output": "~/.config/qt5ct/qt5ct-colors.conf",
+      "template": "qtct-colors.conf"
+    },
+    {
+      "livePreview": false,
+      "name": "qt6ct",
+      "output": "~/.config/qt6ct/qt6ct-colors.conf",
+      "template": "qtct-colors.conf"
+    },
+    {
+      "livePreview": false,
+      "name": "neovim",
+      "output": "~/.config/nvim/neovim-colors.lua",
+      "reload": "kill -SIGUSR1 $(pgrep nvim)",
+      "template": "neovim-template.lua"
+    },
+    {
+      "livePreview": false,
+      "name": "vesktop",
+      "output": "~/.config/vesktop/themes/matugen.css",
+      "template": "vesktop.css"
+    },
+    {
+      "livePreview": false,
+      "name": "yazi",
+      "output": "~/.config/yazi/theme.toml",
+      "template": "yazi.toml"
+    },
+    {
+      "livePreview": false,
+      "name": "zenChrome",
+      "output": "~/.config/zen/hxwkqaur.Default (release)/chrome/userChrome.css",
+      "template": "zen-userChrome.css"
+    },
+    {
+      "livePreview": false,
+      "name": "zenContent",
+      "output": "~/.config/zen/hxwkqaur.Default (release)/chrome/userContent.css",
+      "template": "zen-userContent.css"
+    }
+  ],
   "matugen": {
     "colorIndex": 0,
     "mode": "dark",
     "schemeType": "scheme-content"
   },
+  "niri": {
+    "overviewBackdrop": true,
+    "overviewBackdropBlurEnabled": false
+  },
+  "noctalia": {
+    "themeMode": "follow"
+  },
   "theme": {
     "authority": "skwd",
     "engine": "matugen",
+    "policy": "wallpaper",
     "scheme": "content",
-    "style": "natural"
+    "style": "natural",
+    "wallpaperProfiles": [
+      {
+        "enabled": false,
+        "key": "static:wallhaven-w5xdzx.jpg",
+        "name": "wallhaven-w5xdzx.jpg"
+      }
+    ]
   }
 }
