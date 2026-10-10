@@ -80,6 +80,8 @@ insert_after_last_match() {
         NR == n { print; print line; next }
         { print }
     ' "$file" > "$tmp"
+    chmod --reference="$file" "$tmp"
+    chown --reference="$file" "$tmp"
     mv "$tmp" "$file"
 
     log_ok "Inserted after line ${last_match_line}: ${insert_line}"

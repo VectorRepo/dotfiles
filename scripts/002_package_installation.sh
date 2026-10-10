@@ -56,7 +56,7 @@ pkgs_dev=(
 pkgs_multimedia=(
     "mpv" "zen-browser-bin" "swayimg" "resvg" 
     "wl-clipboard" "cliphist" "vesktop" "steam" "cachyos-gaming-meta" "keepassxc"
-
+)
 
 # Group 11: Sys Admin
 pkgs_sysadmin=(
